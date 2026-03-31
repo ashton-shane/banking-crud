@@ -7,7 +7,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TestCustomer {
     @Test
     public void returnsCorrectAttributes_whenCreateAUserObjectWithAttributes(){
-        Customer customer = new Customer("Ash", "64", "SG", "SG", "640555");
+        Customer customer = Customer.builder()
+                .name("Ash")
+                .city("Singapore")
+                .postalCode("640555")
+                .build();
         assertEquals("Ash", customer.getName());
         assertEquals("640555", customer.getPostalCode());
     }

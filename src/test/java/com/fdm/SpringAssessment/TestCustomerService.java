@@ -29,7 +29,11 @@ public class TestCustomerService {
 
     @BeforeEach
     public void test_config(){
-        customer = new Customer("Ash", "64", "SG", "SG", "640555");
+        customer = Customer.builder()
+                .name("Ash")
+                .city("Singapore")
+                .postalCode("666555")
+                .build();
     }
 
     @Test
