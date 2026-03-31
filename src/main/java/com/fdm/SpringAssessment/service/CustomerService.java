@@ -11,6 +11,10 @@ import java.util.ArrayList;
 public class CustomerService {
     private final CustomerRepository customerRepository;
 
+    public void createCustomer(Customer customer){
+        customerRepository.save(customer);
+    }
+
     public Customer findById(long id) {
         return customerRepository.findById(id);
     }
@@ -19,7 +23,7 @@ public class CustomerService {
         customerRepository.deleteById(id);
     }
 
-    public ArrayList<Customer> findAll() {
+    public ArrayList<Customer> getCustomers() {
         return customerRepository.findAll();
     }
 

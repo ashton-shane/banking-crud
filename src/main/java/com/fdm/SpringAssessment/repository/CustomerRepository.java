@@ -9,6 +9,7 @@ import java.util.ArrayList;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
     Customer findById(long id);
-    Customer deleteById(long id);
+    void deleteById(long id);
     ArrayList<Customer> findAll();
+
 }

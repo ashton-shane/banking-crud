@@ -52,7 +52,7 @@ public class TestCustomerService {
     }
 
     @Test
-    public void returnsArrayOfSizeThree_whenCallingFindAll() {
+    public void returnsArrayOfSizeThree_whenCallingGetCustomers() {
         ArrayList<Customer> mockCustomers = new ArrayList<>(Arrays.asList(
                 customer,
                 new Customer("Ben", "64", "SG", "SG", "640555"),
@@ -60,6 +60,12 @@ public class TestCustomerService {
         ));
 
         when(customerRepository.findAll()).thenReturn(mockCustomers);
-        assertEquals(3, customerService.findAll().size());
+        assertEquals(3, customerService.getCustomers().size());
+    }
+
+    @Test
+    public void verifyCallOnce_whenCallingCreateCustomer() {
+        customerService.createCustomer(customer);
+        verify(customerRepository).save(customer);
     }
 }
