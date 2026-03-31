@@ -4,15 +4,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Table;
+import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.data.annotation.Id;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "users")
-public class User {
+@Table(name = "customers")
+public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long customerId;
@@ -23,5 +23,14 @@ public class User {
     private String postalCode;
 
     // empty constructor to enable JPA to use reflection
-    public User(){};
+    public Customer() {};
+
+    // main constructor
+    public Customer(String name, String streetNumber, String city, String province, String postalCode) {
+        this.name = name;
+        this.streetNumber = streetNumber;
+        this.city = city;
+        this.province = province;
+        this.postalCode = postalCode;
+    }
 }

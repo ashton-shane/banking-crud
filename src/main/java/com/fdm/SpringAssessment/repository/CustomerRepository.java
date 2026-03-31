@@ -1,10 +1,10 @@
 package com.fdm.SpringAssessment.repository;
 
-import com.fdm.SpringAssessment.models.User;
+import com.fdm.SpringAssessment.models.Customer;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-    User findById(long id);
+public interface CustomerRepository extends JpaRepository<Customer, Long> {
+    Customer findById(long id);
 }
