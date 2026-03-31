@@ -20,7 +20,6 @@ public class TestCustomerRepo {
         Customer customer2 = new Customer("Ben", "55", "SG", "SG", "222529");
         customerRepository.save(customer1);
         customerRepository.save(customer2);
-        long id = customer2.getCustomerId();
         assertTrue(customer1.getCustomerId() > 0);
         assertTrue(customer2.getCustomerId() > 0);
     }

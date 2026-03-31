@@ -4,6 +4,8 @@ import com.fdm.SpringAssessment.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+
 @Service
 @RequiredArgsConstructor
 public class CustomerService {
@@ -12,4 +14,15 @@ public class CustomerService {
     public Customer findById(long id) {
         return customerRepository.findById(id);
     }
+
+    public void deleteById(long id) {
+        customerRepository.deleteById(id);
+    }
+
+    public ArrayList<Customer> findAll() {
+        return customerRepository.findAll();
+    }
+
+
 }
+
