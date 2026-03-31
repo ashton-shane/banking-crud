@@ -1,4 +1,4 @@
-package com.fdm.SpringAssessment;
+package com.fdm.SpringAssessment.Customer;
 
 import com.fdm.SpringAssessment.models.Customer;
 import org.junit.jupiter.api.Test;

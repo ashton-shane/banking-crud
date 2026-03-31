@@ -1,23 +1,20 @@
 package com.fdm.SpringAssessment.models;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "accounts")
+@NoArgsConstructor
 @RequiredArgsConstructor
 public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private double balance;
 
-    @Autowired
-    private Customer customer;
-
+    @NonNull private Double balance;
+    @NonNull private Customer customer;
 }
