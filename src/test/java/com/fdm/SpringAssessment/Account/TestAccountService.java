@@ -35,9 +35,11 @@ public class TestAccountService {
     @BeforeEach
     public void test_config() {
         address = Address.builder()
-                .city("Singapore")
-                .postalCode("151515")
-                .streetNumber("64")
+                .building("Clementi West Arc")
+                .blockNumber("88")
+                .roadName("Clementi Avenue 6")
+                .fullAddress("88 Clementi Avenue 6, Singapore 120088")
+                .postalCode("120088")
                 .build();
         person = new Person("Ash", address);
         account = new SavingsAccount(50.00, AccountType.SAVINGS, person);

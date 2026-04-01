@@ -13,16 +13,28 @@ import lombok.*;
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Setter(AccessLevel.NONE)
     private long id;
 
-    private String streetNumber;
-    private String city;
+    private String blockNumber;
+    private String roadName;
+    private String building;
+    private String fullAddress;
     private String postalCode;
 
+
     @Builder
-    public Address(String streetNumber, String city, String postalCode) {
-        this.streetNumber = streetNumber;
-        this.city = city;
+    public Address(@NonNull String building,
+                   String blockNumber,
+                   String roadName,
+                   String fullAddress,
+                   String postalCode
+    )
+    {
+        this.building = building;
+        this.blockNumber = blockNumber;
+        this.roadName = roadName;
+        this.fullAddress = fullAddress;
         this.postalCode = postalCode;
     }
 }

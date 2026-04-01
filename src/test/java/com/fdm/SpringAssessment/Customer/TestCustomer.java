@@ -11,9 +11,11 @@ public class TestCustomer {
     @Test
     public void returnsCorrectAttributes_whenCreateAPersonObjectWithAttributes(){
         Address address = Address.builder()
-                .city("Singapore")
+                .building("Lucky Heights Condo")
+                .blockNumber("64")
+                .roadName("Lucky View Road")
+                .fullAddress("64 Lucky View Road, Singapore 151515")
                 .postalCode("151515")
-                .streetNumber("64")
                 .build();
         Person person = new Person("Ash", address);
         assertEquals("Ash", person.getName());
@@ -23,9 +25,11 @@ public class TestCustomer {
     @Test
     public void returnsCorrectAttributes_whenCreateACompanyObjectWithAttributes(){
         Address address = Address.builder()
-                .city("Singapore")
+                .building("HarbourFront Tower One")
+                .blockNumber("55")
+                .roadName("HarbourFront Walk")
+                .fullAddress("55 HarbourFront Walk, Singapore 123000")
                 .postalCode("123000")
-                .streetNumber("55")
                 .build();
         Company company = new Company("FDM", address);
         assertEquals("FDM", company.getName());

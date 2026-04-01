@@ -24,9 +24,11 @@ public class TestAccountRepo {
     @Test
     public void returnsAccountBalance_whenFindingAccountById() {
         Address address = Address.builder()
-                .city("Singapore")
-                .postalCode("151515")
-                .streetNumber("64")
+                .building("Serangoon Gardens Estate")
+                .blockNumber("42")
+                .roadName("Serangoon Avenue 2")
+                .fullAddress("42 Serangoon Avenue 2, Singapore 556142")
+                .postalCode("556142")
                 .build();
         Person person = new Person("Ash", address);
         customerRepository.save(person);
@@ -41,16 +43,20 @@ public class TestAccountRepo {
     @Test
     public void returnsTrue_whenCreatingAndSavingNewAccounts() {
         Address address1 = Address.builder()
-                .city("Singapore")
-                .postalCode("151515")
-                .streetNumber("64")
+                .building("Bishan Point")
+                .blockNumber("9")
+                .roadName("Bishan Street 14")
+                .fullAddress("9 Bishan Street 14, Singapore 579786")
+                .postalCode("579786")
                 .build();
         Person person1 = new Person("Ash", address1);
 
         Address address2 = Address.builder()
-                .city("Singapore")
-                .postalCode("222222")
-                .streetNumber("55")
+                .building("Jurong East Central")
+                .blockNumber("135")
+                .roadName("Jurong Gateway Road")
+                .fullAddress("135 Jurong Gateway Road, Singapore 600135")
+                .postalCode("600135")
                 .build();
         Person person2 = new Person("Bob", address2);
 
@@ -70,9 +76,11 @@ public class TestAccountRepo {
     @Test
     public void returnsTrue_whenRemovingAccountByAccountId() {
         Address address = Address.builder()
-                .city("Singapore")
-                .postalCode("151515")
-                .streetNumber("64")
+                .building("Serangoon Gardens Estate")
+                .blockNumber("42")
+                .roadName("Serangoon Avenue 2")
+                .fullAddress("42 Serangoon Avenue 2, Singapore 556142")
+                .postalCode("556142")
                 .build();
         Person person = new Person("Ash", address);
         customerRepository.save(person);

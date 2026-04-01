@@ -32,9 +32,11 @@ public class TestCustomerService {
     @BeforeEach
     public void test_config(){
         address = Address.builder()
-                .city("Singapore")
-                .postalCode("151515")
-                .streetNumber("64")
+                .building("Raffles City Tower")
+                .blockNumber("250")
+                .roadName("North Bridge Road")
+                .fullAddress("250 North Bridge Road, Singapore 179101")
+                .postalCode("179101")
                 .build();
         person = new Person("Ash", address);
     }

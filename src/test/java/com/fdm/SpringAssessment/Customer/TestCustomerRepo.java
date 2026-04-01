@@ -18,9 +18,11 @@ public class TestCustomerRepo {
     @Test
     public void returnsCustomerName_whenFindingCustomerById() {
         Address address = Address.builder()
-                .city("Singapore")
-                .postalCode("151515")
-                .streetNumber("64")
+                .building("Marina Bay Residences")
+                .blockNumber("18")
+                .roadName("Marina Boulevard")
+                .fullAddress("18 Marina Boulevard, Singapore 018980")
+                .postalCode("018980")
                 .build();
         Person person = new Person("Ash", address);
 
@@ -33,16 +35,20 @@ public class TestCustomerRepo {
     @Test
     public void returnsTrue_whenCreatingAndSavingNewCustomers() {
         Address address1 = Address.builder()
-                .city("Singapore")
-                .postalCode("151515")
-                .streetNumber("64")
+                .building("Tiong Bahru Plaza")
+                .blockNumber("302")
+                .roadName("Tiong Bahru Road")
+                .fullAddress("302 Tiong Bahru Road, Singapore 168732")
+                .postalCode("168732")
                 .build();
         Person person1 = new Person("Ash", address1);
 
         Address address2 = Address.builder()
-                .city("Singapore")
-                .postalCode("222222")
-                .streetNumber("55")
+                .building("Holland Village Hub")
+                .blockNumber("7")
+                .roadName("Holland Avenue")
+                .fullAddress("7 Holland Avenue, Singapore 275748")
+                .postalCode("275748")
                 .build();
         Person person2 = new Person("Bob", address2);
 
@@ -56,9 +62,11 @@ public class TestCustomerRepo {
     @Test
     public void returnsTrue_whenRemovingCustomerByCustomerId() {
         Address address = Address.builder()
-                .city("Singapore")
-                .postalCode("151515")
-                .streetNumber("64")
+                .building("Marina Bay Residences")
+                .blockNumber("18")
+                .roadName("Marina Boulevard")
+                .fullAddress("18 Marina Boulevard, Singapore 018980")
+                .postalCode("018980")
                 .build();
         Person person = new Person("Ash", address);
         customerRepository.save(person);
