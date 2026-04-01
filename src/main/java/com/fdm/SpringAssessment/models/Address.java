@@ -24,17 +24,15 @@ public class Address {
 
 
     @Builder
-    public Address(@NonNull String building,
-                   String blockNumber,
-                   String roadName,
-                   String fullAddress,
-                   String postalCode
-    )
-    {
-        this.building = building;
+    public Address(@NonNull String blockNumber,
+                   @NonNull String roadName,
+                   @NonNull String fullAddress,
+                   @NonNull String postalCode,
+                   String building) {
         this.blockNumber = blockNumber;
         this.roadName = roadName;
         this.fullAddress = fullAddress;
         this.postalCode = postalCode;
+        this.building = building;
     }
 }
