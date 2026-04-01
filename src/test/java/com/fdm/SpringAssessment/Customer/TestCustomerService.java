@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -78,6 +79,63 @@ public class TestCustomerService {
     @Test
     public void verifyCallOnce_whenCallingCreateCustomer() {
         customerService.createCustomer(person);
+        verify(customerRepository).save(person);
+    }
+
+    @Test
+    public void verifyFindByIdAndSave_whenCallingUpdateName() {
+        long customerId = 42L;
+        when(customerRepository.findById(customerId)).thenReturn(person);
+
+        customerService.updateName(customerId, "River");
+
+        assertEquals("River", person.getName());
+        verify(customerRepository).findById(customerId);
+        verify(customerRepository).save(person);
+    }
+
+    @Test
+    public void updatesAddressFieldsAndSaves_whenCallingUpdateAddress() {
+        long customerId = person.getId();
+        when(customerRepository.findById(customerId)).thenReturn(person);
+
+        Address newAddress = Address.builder()
+                .blockNumber("1")
+                .roadName("Change Alley")
+                .fullAddress("1 Change Alley, Singapore 048616")
+                .postalCode("048616")
+                .building("Ocean Financial Centre")
+                .build();
+
+        customerService.updateAddress(customerId, newAddress);
+
+        assertEquals("1", person.getAddress().getBlockNumber());
+        assertEquals("Change Alley", person.getAddress().getRoadName());
+        assertEquals("1 Change Alley, Singapore 048616", person.getAddress().getFullAddress());
+        assertEquals("048616", person.getAddress().getPostalCode());
+        assertEquals("Ocean Financial Centre", person.getAddress().getBuilding());
+
+        verify(customerRepository).findById(customerId);
+        verify(customerRepository).save(person);
+    }
+
+    @Test
+    public void clearsBuildingOnAddress_whenUpdateAddressWithNullBuilding() {
+        long customerId = person.getId();
+        when(customerRepository.findById(customerId)).thenReturn(person);
+
+        Address newAddress = Address.builder()
+                .blockNumber("10")
+                .roadName("Anson Road")
+                .fullAddress("10 Anson Road, Singapore 079903")
+                .postalCode("079903")
+                .build();
+
+        customerService.updateAddress(customerId, newAddress);
+
+        assertNull(person.getAddress().getBuilding());
+
+        verify(customerRepository).findById(customerId);
         verify(customerRepository).save(person);
     }
 }

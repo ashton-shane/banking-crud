@@ -1,5 +1,6 @@
 package com.fdm.SpringAssessment.controllers;
 
+import com.fdm.SpringAssessment.models.Address;
 import com.fdm.SpringAssessment.models.Customer;
 import com.fdm.SpringAssessment.service.CustomerService;
 import lombok.RequiredArgsConstructor;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 @RestController
 @RequestMapping("/customers")
 @RequiredArgsConstructor
-public class UserController {
+public class CustomerController {
     private final CustomerService customerService;
 
     @GetMapping
@@ -28,5 +29,15 @@ public class UserController {
     @GetMapping
     public void deleteCustomer(long customerId) {
         customerService.deleteById(customerId);
+    }
+
+    @GetMapping
+    public void updateAddress(long customerId, Address address) {
+        customerService.updateAddress(customerId, address);
+    }
+
+    @GetMapping
+    public void updateName(long customerId, String name) {
+        customerService.updateName(customerId, name);
     }
 }
