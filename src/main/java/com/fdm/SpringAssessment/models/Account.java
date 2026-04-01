@@ -1,5 +1,6 @@
 package com.fdm.SpringAssessment.models;
 
+import com.fdm.SpringAssessment.enums.AccountType;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +11,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Table(name = "accounts")
 @NoArgsConstructor
 @RequiredArgsConstructor
-public class Account {
+public abstract class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @NonNull
     private Double balance;
+
+    @NonNull
+    @Enumerated(EnumType.STRING)
+    private AccountType accountType;
 
     @NonNull
     @ManyToOne
