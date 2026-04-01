@@ -3,7 +3,6 @@ package com.fdm.SpringAssessment.models;
 import com.fdm.SpringAssessment.enums.AccountType;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Getter
 @Setter
@@ -11,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @Table(name = "accounts")
 @NoArgsConstructor
 @RequiredArgsConstructor
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
