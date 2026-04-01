@@ -15,12 +15,12 @@ public class CustomerService {
         customerRepository.save(customer);
     }
 
-    public Customer findById(long id) {
-        return customerRepository.findById(id);
+    public Customer findById(long customerId) {
+        return customerRepository.findById(customerId);
     }
 
-    public void deleteById(long id) {
-        customerRepository.deleteById(id);
+    public void deleteById(long customerId) {
+        customerRepository.deleteById(customerId);
     }
 
     public ArrayList<Customer> getCustomers() {

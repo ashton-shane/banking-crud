@@ -19,4 +19,14 @@ public class UserController {
     public ArrayList<Customer> getCustomers() {
         return customerService.getCustomers();
     }
+
+    @GetMapping
+    public void createCustomer(Customer customer) {
+        customerService.createCustomer(customer);
+    }
+
+    @GetMapping
+    public void deleteCustomer(long customerId) {
+        customerService.deleteById(customerId);
+    }
 }

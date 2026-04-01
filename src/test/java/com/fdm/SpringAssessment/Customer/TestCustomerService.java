@@ -1,6 +1,7 @@
 package com.fdm.SpringAssessment.Customer;
 
 import com.fdm.SpringAssessment.models.Customer;
+import com.fdm.SpringAssessment.models.Person;
 import com.fdm.SpringAssessment.repository.CustomerRepository;
 import com.fdm.SpringAssessment.service.CustomerService;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,11 +26,11 @@ public class TestCustomerService {
     @InjectMocks
     CustomerService customerService;
 
-    Customer customer;
+    Person person;
 
     @BeforeEach
     public void test_config(){
-        customer = Customer.builder()
+        person = Person.builder()
                 .name("Ash")
                 .city("Singapore")
                 .postalCode("666555")
@@ -38,29 +39,29 @@ public class TestCustomerService {
 
     @Test
     public void verifyCallOnce_whenCallingFindById() {
-        customerService.findById(customer.getCustomerId());
-        verify(customerRepository).findById(customer.getCustomerId());
+        customerService.findById(person.getCustomerId());
+        verify(customerRepository).findById(person.getCustomerId());
     }
 
     @Test
     public void returnsName_whenCallingFindById() {
-        long custId = customer.getCustomerId();
-        when(customerRepository.findById(custId)).thenReturn(customer);
+        long custId = person.getCustomerId();
+        when(customerRepository.findById(custId)).thenReturn(person);
         assertEquals("Ash", customerService.findById(custId).getName());
     }
 
     @Test
     public void verifyCallOnce_whenCallingDeleteById() {
-        customerService.deleteById(customer.getCustomerId());
-        verify(customerRepository).deleteById(customer.getCustomerId());
+        customerService.deleteById(person.getCustomerId());
+        verify(customerRepository).deleteById(person.getCustomerId());
     }
 
     @Test
     public void returnsArrayOfSizeThree_whenCallingGetCustomers() {
         ArrayList<Customer> mockCustomers = new ArrayList<>(Arrays.asList(
-                customer,
-                new Customer("Ben", "64", "SG", "SG", "640555"),
-                new Customer("Vivian", "64", "SG", "SG", "640555")
+                person,
+                new Person("Ben", "64", "SG", "SG", "640555"),
+                new Person("Vivian", "64", "SG", "SG", "640555")
         ));
 
         when(customerRepository.findAll()).thenReturn(mockCustomers);
@@ -69,7 +70,7 @@ public class TestCustomerService {
 
     @Test
     public void verifyCallOnce_whenCallingCreateCustomer() {
-        customerService.createCustomer(customer);
-        verify(customerRepository).save(customer);
+        customerService.createCustomer(person);
+        verify(customerRepository).save(person);
     }
 }

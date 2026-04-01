@@ -1,29 +1,30 @@
 package com.fdm.SpringAssessment.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Table;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "customers")
 @NoArgsConstructor              // enable JPA reflection
-public class Customer {
+public abstract class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long customerId;
 
-    @NonNull private String name;
+    private String name;
     private String streetNumber;
-    @NonNull private String city;
+    private String city;
     private String province;
-    @NonNull private String postalCode;
+    private String postalCode;
 
-    @Builder
+    @OneToMany(mappedBy = "customer")
+    List<Account> accounts = new ArrayList<>();
+
     public Customer(String name, String streetNumber, String city, String province, String postalCode) {
         this.name = name;
         this.streetNumber = streetNumber;
