@@ -26,7 +26,5 @@ public class CustomerService {
     public ArrayList<Customer> getCustomers() {
         return customerRepository.findAll();
     }
-
-
 }
 

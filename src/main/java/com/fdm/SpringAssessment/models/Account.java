@@ -16,5 +16,7 @@ public class Account {
     private long id;
 
     @NonNull private Double balance;
-    @NonNull private Customer customer;
+    @NonNull
+    @OneToOne
+    private Customer customer;
 }

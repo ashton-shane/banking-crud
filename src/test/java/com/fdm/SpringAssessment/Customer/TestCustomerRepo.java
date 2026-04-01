@@ -6,13 +6,25 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 public class TestCustomerRepo {
     @Autowired
     CustomerRepository customerRepository;
+
+    @Test
+    public void returnsCustomerName_whenFindingCustomerById() {
+        Customer customer1 = Customer.builder()
+                .name("Ash")
+                .city("Singapore")
+                .postalCode("640555")
+                .build();
+        customerRepository.save(customer1);
+        Customer foundCust = customerRepository.findById(customer1.getCustomerId());
+        System.out.println(foundCust.getName());
+        assertEquals("Ash", foundCust.getName());
+    }
 
     @Test
     public void returnsTrue_whenCreatingAndSavingNewCustomers() {
