@@ -1,5 +1,6 @@
 package com.fdm.SpringAssessment.Customer;
 
+import com.fdm.SpringAssessment.models.Address;
 import com.fdm.SpringAssessment.models.Company;
 import com.fdm.SpringAssessment.models.Customer;
 import com.fdm.SpringAssessment.models.Person;
@@ -9,24 +10,26 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class TestCustomer {
     @Test
     public void returnsCorrectAttributes_whenCreateAPersonObjectWithAttributes(){
-        Person person = Person.builder()
-                .name("Ash")
+        Address address = Address.builder()
                 .city("Singapore")
-                .postalCode("640555")
+                .postalCode("151515")
+                .streetNumber("64")
                 .build();
+        Person person = new Person("Ash", address);
         assertEquals("Ash", person.getName());
-        assertEquals("640555", person.getPostalCode());
+        assertEquals("151515", person.getAddress().getPostalCode());
     }
 
     @Test
     public void returnsCorrectAttributes_whenCreateACompanyObjectWithAttributes(){
-        Company company = Company.builder()
-                .name("FDM")
+        Address address = Address.builder()
                 .city("Singapore")
                 .postalCode("123000")
+                .streetNumber("55")
                 .build();
+        Company company = new Company("FDM", address);
         assertEquals("FDM", company.getName());
-        assertEquals("123000", company.getPostalCode());
+        assertEquals("123000", company.getAddress().getPostalCode());
     }
 
 }

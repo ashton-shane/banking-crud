@@ -11,25 +11,24 @@ import java.util.List;
 @Entity
 @Table(name = "customers")
 @NoArgsConstructor              // enable JPA reflection
+@Inheritance(strategy = InheritanceType.JOINED)
 public abstract class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long customerId;
+    private long id;
 
     private String name;
-    private String streetNumber;
-    private String city;
-    private String province;
-    private String postalCode;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id")
+    private Address address;
 
     @OneToMany(mappedBy = "customer")
-    List<Account> accounts = new ArrayList<>();
+    private List<Account> accounts = new ArrayList<>();
 
-    public Customer(String name, String streetNumber, String city, String province, String postalCode) {
+    // constructor
+    public Customer(String name, Address address) {
         this.name = name;
-        this.streetNumber = streetNumber;
-        this.city = city;
-        this.province = province;
-        this.postalCode = postalCode;
+        this.address = address;
     }
 }

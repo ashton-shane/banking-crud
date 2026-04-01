@@ -1,17 +1,12 @@
 package com.fdm.SpringAssessment.models;
 
 import jakarta.persistence.Entity;
-import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 @Entity
-public class Company extends Customer{
-    @Builder
-    public Company (
-            String name,
-            String streetNumber,
-            String city,
-            String province,
-            String postalCode) {
-        super(name, streetNumber, city, province, postalCode);
+@NoArgsConstructor
+public class Company extends Customer {
+    public Company (String name, Address address) {
+        super(name, address);
     }
 }

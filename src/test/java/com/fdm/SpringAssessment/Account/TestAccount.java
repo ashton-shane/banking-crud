@@ -11,11 +11,12 @@ public class TestAccount {
     @Test
     public void returnsCorrectAttributes_whenCreateSavingsAccountObjectWithAttributes(){
 
-        Person person = Person.builder()
-                .name("Ash")
+        Address address = Address.builder()
                 .city("Singapore")
-                .postalCode("640555")
+                .postalCode("151515")
+                .streetNumber("64")
                 .build();
+        Person person = new Person("Ash", address);
         Account account = new SavingsAccount(50.00, SAVINGS, person);
         assertEquals(50.00, account.getBalance());
         assertEquals(SAVINGS, account.getAccountType());
@@ -25,11 +26,12 @@ public class TestAccount {
 
     @Test
     public void returnsCorrectAttributes_whenCreateCheckingAccountObjectWithAttributes(){
-        Person person = Person.builder()
-                .name("Bob")
+        Address address = Address.builder()
                 .city("Singapore")
-                .postalCode("123543")
+                .postalCode("151515")
+                .streetNumber("64")
                 .build();
+        Person person = new Person("Bob", address);
         Account account = new SavingsAccount(100.00, CHECKING, person);
 
         assertEquals(100.00, account.getBalance());
