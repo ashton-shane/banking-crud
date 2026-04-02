@@ -7,5 +7,5 @@ public class EnvConfiguration {
     @Bean
     public Dotenv dotenv() {
         return Dotenv.load();
-}
+    }
 }

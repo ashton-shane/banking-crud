@@ -13,14 +13,14 @@ public class OneMapService {
         this.apiToken = dotenv.get("API_TOKEN");
     }
 
-    public Address getAddressByPostalCode(String postalCode) {
+    public String getAddressByPostalCode(String postalCode) {
         // to implement error checking for api
         RestClient restClient = RestClient.create();
-        String baseUrl = "https://www.onemap.gov.sg/api/common/elastic/search";
-
         String result = restClient.get()
                 .uri(uriBuilder -> uriBuilder
-                        .path(baseUrl)
+                        .scheme("https")
+                        .host("www.onemap.gov.sg")
+                        .path("/api/common/elastic/search")
                         .queryParam("searchVal", postalCode)
                         .queryParam("returnGeom", "N")
                         .queryParam("getAddrDetails", "Y")
@@ -30,6 +30,6 @@ public class OneMapService {
                 .retrieve()
                 .body(String.class);
 
-        System.out.println(result);
+        return result;
     }
 }
