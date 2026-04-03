@@ -5,6 +5,7 @@ import com.fdm.SpringAssessment.models.Customer;
 import com.fdm.SpringAssessment.service.CustomerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,6 +20,11 @@ public class CustomerController {
     @GetMapping
     public ArrayList<Customer> getCustomers() {
         return customerService.getCustomers();
+    }
+
+    @GetMapping("/{customerId}")
+    public Customer findById(@PathVariable long customerId) {
+        return customerService.findById(customerId);
     }
 
     @GetMapping
