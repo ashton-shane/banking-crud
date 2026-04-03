@@ -1,5 +1,5 @@
 import "./App.css";
-import Form from "./components/Form";
+import Form from "./components/AccountsList";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 
