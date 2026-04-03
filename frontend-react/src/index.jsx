@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
+import "./index.css";
 import App from "./App";
 
 // this is just a config file to make App.js a child of BrowserRouter
