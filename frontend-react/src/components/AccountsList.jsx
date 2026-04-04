@@ -2,7 +2,6 @@ function AccountsList({ accounts }) {
   return (
     <main className="main">
       <h2>View All Accounts</h2>
-
       <div className="toolbar">
         <button type="button" className="btn btn-primary">
           Add New Account
