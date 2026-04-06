@@ -1,13 +1,12 @@
 import "./styles/App.css";
-
-import Form from "./components/Form";
 import Header from "./components/Header";
 import Sidebar from "./components/Sidebar";
 
-import { Routes, Route} from "react-router-dom";
-import FindById from "./components/FindById";
+import { Routes, Route } from "react-router-dom";
 import FindAccount from "./pages/FindAccount";
 import FindCustomer from "./pages/FindCustomer";
+import DisplayAccounts from "./pages/DisplayAccounts";
+import DisplayCustomers from "./pages/DisplayCustomers";
 
 function App() {
   return (
@@ -19,8 +18,9 @@ function App() {
         <Routes>
             <Route path="/find-customer" element={<FindCustomer />}></Route>
             <Route path="/find-account" element={<FindAccount />}></Route>
+            <Route path= "/accounts" element={<DisplayAccounts />}></Route>
+            <Route path= "/customers" element={<DisplayCustomers />}></Route>
         </Routes>
-        <Form />
       </div>
     </div>
   );

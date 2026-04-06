@@ -10,10 +10,10 @@ function Sidebar() {
         <Link to="/">Home</Link>
         <Link to="/create-customer">Create Corporate Customer</Link>
         <Link to="/customers">Customers</Link>
-        <Link to="/find-by-id">Find Customer</Link>
+        <Link to="/find-customer">Find Customer</Link>
         <Link to="/create-customer">Create Account</Link>
-        <Link to="/customers">Accounts</Link>
-        <Link to="/find-by-id">Find Account</Link>
+        <Link to="/accounts">Accounts</Link>
+        <Link to="/find-account">Find Account</Link>
       </nav>
     </aside>
   );

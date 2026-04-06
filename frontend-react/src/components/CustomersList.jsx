@@ -1,4 +1,4 @@
-function CustomersList({ customers }) {
+function CustomersList({ customers = [] }) {
   return (
     <main className="main">
       <h2>View All Customers</h2>
@@ -22,23 +22,31 @@ function CustomersList({ customers }) {
             </tr>
           </thead>
           <tbody>
-            {customers.map((row) => (
-              <tr key={row.id}>
-                <td className="mono">{row.id}</td>
-                <td className="mono">{row.name}</td>
-                <td className="mono">{row.account_id}</td>
-                <td className="col-actions">
-                  <div className="actions-cell">
-                    <button type="button" className="btn btn-edit">
-                      Update
-                    </button>
-                    <button type="button" className="btn btn-danger">
-                      Delete
-                    </button>
-                  </div>
+            {customers.length > 0 ? (
+              customers.map((row) => (
+                <tr key={row.id}>
+                  <td className="mono">{row.id}</td>
+                  <td className="mono">{row.name}</td>
+                  <td className="mono">{row.account_id}</td>
+                  <td className="col-actions">
+                    <div className="actions-cell">
+                      <button type="button" className="btn btn-edit">
+                        Update
+                      </button>
+                      <button type="button" className="btn btn-danger">
+                        Delete
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td className="mono" colSpan={4}>
+                  No customers found.
                 </td>
               </tr>
-            ))}
+            )}
           </tbody>
         </table>
       </div>

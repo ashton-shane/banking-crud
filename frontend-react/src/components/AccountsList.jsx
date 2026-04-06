@@ -1,7 +1,8 @@
-function AccountsList({ accounts }) {
+function AccountsList({ accounts = [] }) {
   return (
     <main className="main">
       <h2>View All Accounts</h2>
+
       <div className="toolbar">
         <button type="button" className="btn btn-primary">
           Add New Account
@@ -24,8 +25,8 @@ function AccountsList({ accounts }) {
             {accounts.map((row) => (
               <tr key={row.id}>
                 <td className="mono">{row.id}</td>
-                <td className="mono">{row.balance.toFixed(2)}</td>
-                <td className="mono">{row.interestRate}%</td>
+                <td className="mono">{(row.balance ?? 0).toFixed(2)}</td>
+                <td className="mono">{row.interestRate ?? ""}%</td>
                 <td className="col-actions">
                   <div className="actions-cell">
                     <button type="button" className="btn btn-edit">
