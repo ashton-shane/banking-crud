@@ -54,8 +54,8 @@ public class TestAccountService {
     @Test
     public void returnsBalance_whenCallingFindById() {
         long accountId = account.getId();
-        when(accountRepository.findById(accountId)).thenReturn(account);
-        assertEquals(50.00, accountService.findById(accountId).getBalance());
+        when(accountRepository.findById(accountId).orElseThrow()).thenReturn(account);
+        assertEquals(50.00, accountService.findById(accountId).orElseThrow().getBalance());
     }
 
     @Test

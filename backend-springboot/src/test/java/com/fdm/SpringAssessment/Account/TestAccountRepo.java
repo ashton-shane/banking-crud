@@ -38,7 +38,7 @@ public class TestAccountRepo {
 
         Account account = new SavingsAccount(50.00, AccountType.SAVINGS, person);
         accountRepository.save(account);
-        Account found = accountRepository.findById(account.getId());
+        Account found = accountRepository.findById(account.getId()).orElseThrow();
 
         assertEquals(50.00, found.getBalance());
     }

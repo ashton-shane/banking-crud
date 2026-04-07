@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -18,7 +19,7 @@ public class AccountService {
         accountRepository.save(account);
     }
 
-    public Account findById(long accountId) {
+    public Optional<Account> findById(long accountId) {
         return accountRepository.findById(accountId);
     }
 
