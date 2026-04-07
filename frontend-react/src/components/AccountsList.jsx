@@ -1,4 +1,4 @@
-function AccountsList({ accounts = [] }) {
+function AccountsList({ accounts = [], onUpdate = () => {}, onDelete = () => {} }) {
   return (
     <main className="main">
       <h2>View All Accounts</h2>
@@ -29,10 +29,10 @@ function AccountsList({ accounts = [] }) {
                 <td className="mono">{row.interestRate ?? ""}%</td>
                 <td className="col-actions">
                   <div className="actions-cell">
-                    <button type="button" className="btn btn-edit">
+                    <button type="button" className="btn btn-edit" onClick={() => onUpdate(row)}>
                       Update
                     </button>
-                    <button type="button" className="btn btn-danger">
+                    <button type="button" className="btn btn-danger" onClick={() => onDelete(row)}>
                       Delete
                     </button>
                   </div>

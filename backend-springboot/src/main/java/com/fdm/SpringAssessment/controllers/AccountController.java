@@ -11,28 +11,39 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping("/accounts")
+@RequestMapping("/")
+@org.springframework.web.bind.annotation.CrossOrigin(origins = "http://localhost:5173")
 @RequiredArgsConstructor
 public class AccountController {
     private final AccountService accountService;
 
-    @GetMapping
+    @GetMapping("/accounts")
     public ArrayList<Account> getAccounts() {
         return accountService.getAccounts();
     }
 
-    @GetMapping("/{accountId}")
+    // singular account route requested: /account/{id}
+    @GetMapping("/account/{accountId}")
     public Account findById(@PathVariable long accountId) {
         return accountService.findById(accountId);
     }
 
-    @GetMapping
+    @GetMapping("/accounts/create")
     public void createAccount(Account account) {
         accountService.createAccount(account);
     }
 
-    @GetMapping
-    public void deleteAccount(long accountId) {
+    @GetMapping("/accounts/delete/{accountId}")
+    public void deleteAccount(@PathVariable long accountId) {
         accountService.deleteById(accountId);
+    }
+
+    @org.springframework.web.bind.annotation.PostMapping("/accounts/{accountId}/update")
+    public void updateAccountBalance(@PathVariable long accountId, @org.springframework.web.bind.annotation.RequestBody Account payload) {
+        Account existing = accountService.findById(accountId);
+        if (existing != null) {
+            existing.setBalance(payload.getBalance());
+            accountService.createAccount(existing);
+        }
     }
 }

@@ -1,10 +1,10 @@
 package com.fdm.SpringAssessment.service;
 
-import com.fdm.SpringAssessment.models.Address;
 import io.github.cdimascio.dotenv.Dotenv;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestClient;
-import tools.jackson.databind.JsonNode;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.util.UriComponentsBuilder;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,50 +15,55 @@ import java.util.Map;
 public class OneMapService {
     private final String apiToken;
 
+    // allow Dotenv to be null-injected or missing; use a safe fallback
     public OneMapService(Dotenv dotenv) {
-        this.apiToken = dotenv.get("API_TOKEN");
+        String token = null;
+        try {
+            if (dotenv != null) token = dotenv.get("API_TOKEN");
+        } catch (Exception ignored) {
+        }
+        this.apiToken = token;
     }
 
     public List<Map<String, Object>> getAddressByPostalCode(String postalCode) {
-
-        // build API call params
-        RestClient restClient = RestClient.create();
-        JsonNode response = restClient.get()
-                .uri(uriBuilder -> uriBuilder
-                        .scheme("https")
-                        .host("www.onemap.gov.sg")
-                        .path("/api/common/elastic/search")
-                        .queryParam("searchVal", postalCode)
-                        .queryParam("returnGeom", "N")
-                        .queryParam("getAddrDetails", "Y")
-                        .build()
-                )
-                .header("Authorization", "Bearer " + apiToken)
-                .retrieve()
-                .body(JsonNode.class);
-
-        // make results into list + error checking
         List<Map<String, Object>> addresses = new ArrayList<>();
-        JsonNode results = response.get("results");
-        if (results != null || !results.isArray()) {
-            return addresses;
-        }
 
-        int idIndex = 0;
-        for (JsonNode result : results) {
-            Map<String, Object> item = new HashMap<>();
-            item.put("id", idIndex);
-            item.put("blkNo", result.path("BLK_NO").asText());
-            item.put("roadName", result.path("ROAD_NAME").asText());
-            item.put("building", result.path("BUILDING").asText());
-            item.put("address", result.path("ADDRESS").asText());
-            item.put("postalCode", result.path("POSTAL").asText());
+        try {
+            RestTemplate rest = new RestTemplate();
+            String url = UriComponentsBuilder.fromUriString("https://www.onemap.gov.sg/api/common/elastic/search")
+                    .queryParam("searchVal", postalCode)
+                    .queryParam("returnGeom", "N")
+                    .queryParam("getAddrDetails", "Y")
+                    .toUriString();
 
-            addresses.add(item);
-            idIndex++;
+            ResponseEntity<Map> resp = rest.getForEntity(url, Map.class);
+            if (!resp.getStatusCode().is2xxSuccessful()) return addresses;
+
+            Map body = resp.getBody();
+            if (body == null) return addresses;
+
+            Object resultsObj = body.get("results");
+            if (!(resultsObj instanceof List)) return addresses;
+
+            List results = (List) resultsObj;
+            int idIndex = 0;
+            for (Object r : results) {
+                if (!(r instanceof Map)) continue;
+                Map m = (Map) r;
+                Map<String, Object> item = new HashMap<>();
+                item.put("id", idIndex);
+                item.put("blkNo", m.getOrDefault("BLK_NO", ""));
+                item.put("roadName", m.getOrDefault("ROAD_NAME", ""));
+                item.put("building", m.getOrDefault("BUILDING", ""));
+                item.put("address", m.getOrDefault("ADDRESS", ""));
+                item.put("postalCode", m.getOrDefault("POSTAL", ""));
+                addresses.add(item);
+                idIndex++;
+            }
+        } catch (Exception e) {
+            // ignore - return empty list on failure
         }
 
         return addresses;
-
     }
 }

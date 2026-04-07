@@ -12,38 +12,41 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.ArrayList;
 
 @RestController
-@RequestMapping("/customers")
+@RequestMapping("/")
+@org.springframework.web.bind.annotation.CrossOrigin(origins = "http://localhost:5173")
 @RequiredArgsConstructor
 public class CustomerController {
     private final CustomerService customerService;
 
-    @GetMapping
+    @GetMapping("/customers")
     public ArrayList<Customer> getCustomers() {
         return customerService.getCustomers();
     }
 
-    @GetMapping("/{customerId}")
+    // singular customer route (requested): /customer/{id}
+    @GetMapping("/customer/{customerId}")
     public Customer findById(@PathVariable long customerId) {
         return customerService.findById(customerId);
     }
 
-    @GetMapping
+    // kept as GETs to avoid changing semantics in this patch — only paths adjusted to avoid mapping collisions
+    @GetMapping("/customers/create")
     public void createCustomer(Customer customer) {
         customerService.createCustomer(customer);
     }
 
-    @GetMapping
-    public void deleteCustomer(long customerId) {
+    @GetMapping("/customers/delete/{customerId}")
+    public void deleteCustomer(@PathVariable long customerId) {
         customerService.deleteById(customerId);
     }
 
-    @GetMapping
-    public void updateAddress(long customerId, Address address) {
+    @GetMapping("/customers/{customerId}/address")
+    public void updateAddress(@PathVariable long customerId, Address address) {
         customerService.updateAddress(customerId, address);
     }
 
-    @GetMapping
-    public void updateName(long customerId, String name) {
+    @GetMapping("/customers/{customerId}/name")
+    public void updateName(@PathVariable long customerId, String name) {
         customerService.updateName(customerId, name);
     }
 }
