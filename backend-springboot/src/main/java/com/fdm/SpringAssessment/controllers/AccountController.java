@@ -4,17 +4,14 @@ import com.fdm.SpringAssessment.DTO.AccountDTO;
 import com.fdm.SpringAssessment.models.Account;
 import com.fdm.SpringAssessment.service.AccountService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/")
-@org.springframework.web.bind.annotation.CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "http://localhost:5173")
 @RequiredArgsConstructor
 public class AccountController {
     private final AccountService accountService;
