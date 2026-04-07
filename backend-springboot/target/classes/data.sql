@@ -61,6 +61,17 @@ VALUES (9, 'Ivan', 9);
 INSERT INTO customers (id, name, address_id)
 VALUES (10, 'Judy', 10);
 
+-- Seed PERSON
+INSERT INTO person (id) VALUES (1);
+INSERT INTO person (id) VALUES (2);
+INSERT INTO person (id) VALUES (3);
+INSERT INTO person (id) VALUES (4);
+INSERT INTO person (id) VALUES (5);
+INSERT INTO person (id) VALUES (6);
+INSERT INTO person (id) VALUES (7);
+INSERT INTO person (id) VALUES (8);
+INSERT INTO person (id) VALUES (9);
+INSERT INTO person (id) VALUES (10);
 
 -- Seed parent accounts table
 -- IDs 1,3,5,7,9 are CHECKING
