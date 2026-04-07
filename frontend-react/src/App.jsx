@@ -21,7 +21,6 @@ function App() {
             <Route path="/customers" element={<DisplayCustomers />}></Route>
             <Route path="/" element={<Homepage />}></Route>
         </Routes>
-        <Form />
       </div>
     </div>
   );

@@ -1,3 +1,4 @@
+/* Small helper styles moved from inline attributes into a shared file */
 .find-form {
   margin-bottom: 1rem;
 }
@@ -36,3 +37,62 @@
   stroke-linecap: round;
   stroke-linejoin: round;
 }
+
+/* toolbar layout helpers */
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.toolbar-search input,
+.sidebar-search.compact input {
+  width: 300px; /* make the compact search a bit longer */
+}
+.sidebar-search input {
+  width: 220px;
+}
+
+/* make the search form align with buttons and look like a pill */
+.sidebar-search,
+.sidebar-search.compact {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 4px; /* outer padding for pill */
+  border-radius: 12px;
+  background: transparent;
+}
+
+.sidebar-search input {
+  border: none;
+  outline: none;
+  padding: 8px 10px;
+  background: white;
+  border-radius: 10px;
+}
+
+.sidebar-search button {
+  border: none;
+  background: #06b6a4; /* teal */
+  color: #fff;
+  width: 40px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* ensure the search icon inside the button is sized appropriately */
+.sidebar-search button .search-icon {
+  width: 18px;
+  height: 18px;
+}
+

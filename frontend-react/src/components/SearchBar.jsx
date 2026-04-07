@@ -1,6 +1,9 @@
-function SearchBar() {
+import "../styles/inline.css";
+
+function SearchBar({ compact = false }) {
+  const formClass = compact ? "sidebar-search compact" : "sidebar-search";
   return (
-    <form className="sidebar-search" role="search" onSubmit={(e) => e.preventDefault()}>
+    <form className={formClass} role="search" onSubmit={(e) => e.preventDefault()}>
       <input type="search" placeholder="Search..." aria-label="Search" />
       <button type="submit" title="Search" aria-label="Search">
         <svg className="search-icon" viewBox="0 0 24 24" aria-hidden>

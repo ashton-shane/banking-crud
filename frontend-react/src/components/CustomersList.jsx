@@ -1,12 +1,19 @@
+import SearchBar from "./SearchBar";
+
 function CustomersList({ customers }) {
   return (
     <main className="main">
       <h2>View All Customers</h2>
 
       <div className="toolbar">
-        <button type="button" className="btn btn-primary">
-          Add New Customer
-        </button>
+        <div className="toolbar-left">
+          <button type="button" className="btn btn-primary">
+            Add New Customer
+          </button>
+          <div className="toolbar-search">
+            <SearchBar compact />
+          </div>
+        </div>
       </div>
 
       <div className="table-card">

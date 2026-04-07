@@ -1,11 +1,18 @@
-function AccountsList({ accounts }) {
+import SearchBar from "./SearchBar";
+
+function AccountsList({ accounts, onUpdate = () => {}, onDelete = () => {} }) {
   return (
     <main className="main">
       <h2>View All Accounts</h2>
       <div className="toolbar">
-        <button type="button" className="btn btn-primary">
-          Add New Account
-        </button>
+        <div className="toolbar-left">
+          <button type="button" className="btn btn-primary">
+            Add New Account
+          </button>
+          <div className="toolbar-search">
+            <SearchBar compact />
+          </div>
+        </div>
       </div>
 
       <div className="table-card">
