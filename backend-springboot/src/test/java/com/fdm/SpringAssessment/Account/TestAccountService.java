@@ -78,8 +78,12 @@ public class TestAccountService {
                 new SavingsAccount(200.00, AccountType.SAVINGS, person2)
         ));
 
-        when(accountRepository.findAll()).thenReturn(mockAccounts);
-        assertEquals(3, accountService.getAccounts().size());
+    when(accountRepository.findAll()).thenReturn(mockAccounts);
+    var dtos = accountService.getAccounts();
+    assertEquals(3, dtos.size());
+    // verify each dto contains flattened customer info
+    assertEquals(mockAccounts.get(0).getCustomer().getId(), dtos.get(0).getCustomerId());
+    assertEquals(mockAccounts.get(0).getCustomer().getName(), dtos.get(0).getCustomerName());
     }
 
     @Test
