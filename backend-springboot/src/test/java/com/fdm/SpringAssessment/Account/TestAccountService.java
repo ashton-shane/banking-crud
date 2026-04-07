@@ -16,6 +16,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
@@ -54,7 +55,7 @@ public class TestAccountService {
     @Test
     public void returnsBalance_whenCallingFindById() {
         long accountId = account.getId();
-        when(accountRepository.findById(accountId).orElseThrow()).thenReturn(account);
+        when(accountRepository.findById(accountId)).thenReturn(Optional.ofNullable(account));
         assertEquals(50.00, accountService.findById(accountId).orElseThrow().getBalance());
     }
 

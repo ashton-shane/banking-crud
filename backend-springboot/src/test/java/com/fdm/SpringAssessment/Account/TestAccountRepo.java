@@ -92,6 +92,6 @@ public class TestAccountRepo {
         accountRepository.save(account);
         long accountId = account.getId();
         accountRepository.deleteById(accountId);
-        assertNull(accountRepository.findById(accountId));
+        assertTrue(accountRepository.findById(accountId).isEmpty());
     }
 }
