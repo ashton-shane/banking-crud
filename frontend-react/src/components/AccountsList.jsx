@@ -21,7 +21,7 @@ function AccountsList({ accounts, onUpdate = () => {}, onDelete = () => {} }) {
             <tr>
               <th scope="col">Account Id</th>
               <th scope="col">Account Balance</th>
-              <th scope="col">Interest Rate</th>
+              <th scope="col">Account Type</th>
               <th scope="col" className="col-actions">
                 Actions
               </th>
@@ -32,7 +32,7 @@ function AccountsList({ accounts, onUpdate = () => {}, onDelete = () => {} }) {
               <tr key={row.id}>
                 <td className="mono">{row.id}</td>
                 <td className="mono">{row.balance.toFixed(2)}</td>
-                <td className="mono">{row.interestRate}%</td>
+                <td className="mono">{row.accountType}</td>
                 <td className="col-actions">
                   <div className="actions-cell">
                     <button type="button" className="btn btn-edit" onClick={() => onUpdate(row)}>
