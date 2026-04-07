@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "../styles/inline.css";
 
 export default function FindById({ id: initialId, onFind }) {
   const [value, setValue] = useState(initialId ?? "");
@@ -56,14 +57,14 @@ export default function FindById({ id: initialId, onFind }) {
         </button>
       </form>
 
-      <div style={{ marginTop: "1rem" }}>
-        {loading && <div className="table-card" style={{ padding: "1rem" }}>Loading...</div>}
+      <div className="spaced">
+        {loading && <div className="table-card padding-1">Loading...</div>}
         {!loading && result && (
-          <div className="table-card" style={{ padding: "1rem" }}>
+          <div className="table-card padding-1">
             {result.error ? (
-              <div style={{ color: "#b91c1c", fontWeight: 600 }}>{result.error}</div>
+              <div className="error-text">{result.error}</div>
             ) : (
-              <pre style={{ margin: 0 }}>{JSON.stringify(result, null, 2)}</pre>
+              <pre className="pre-zero-margin">{JSON.stringify(result, null, 2)}</pre>
             )}
           </div>
         )}

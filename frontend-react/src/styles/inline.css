@@ -1,0 +1,38 @@
+.find-form {
+  margin-bottom: 1rem;
+}
+.find-label {
+  margin-right: 0.5rem;
+}
+.go-button {
+  margin-left: 0.5rem;
+}
+.modal .modal-content {
+  /* basic modal content spacing */
+  padding: 1rem;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+}
+.modal .spaced {
+  margin-top: 1rem;
+}
+.table-card.padding-1 {
+  padding: 1rem;
+}
+.error-text {
+  color: #b91c1c;
+  font-weight: 600;
+}
+.pre-zero-margin {
+  margin: 0;
+}
+.search-icon {
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
