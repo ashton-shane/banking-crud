@@ -1,4 +1,4 @@
-function CustomersList({ customers = [], onUpdate = () => {}, onDelete = () => {} }) {
+function CustomersList({ customers }) {
   return (
     <main className="main">
       <h2>View All Customers</h2>
@@ -22,31 +22,23 @@ function CustomersList({ customers = [], onUpdate = () => {}, onDelete = () => {
             </tr>
           </thead>
           <tbody>
-            {customers.length > 0 ? (
-              customers.map((row) => (
-                <tr key={row.id}>
-                  <td className="mono">{row.id}</td>
-                  <td className="mono">{row.name}</td>
-                  <td className="mono">{row.account_id}</td>
-                  <td className="col-actions">
-                    <div className="actions-cell">
-                      <button type="button" className="btn btn-edit" onClick={() => onUpdate(row)}>
-                        Update
-                      </button>
-                      <button type="button" className="btn btn-danger" onClick={() => onDelete(row)}>
-                        Delete
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))
-            ) : (
-              <tr>
-                <td className="mono" colSpan={4}>
-                  No customers found.
+            {customers.map((row) => (
+              <tr key={row.id}>
+                <td className="mono">{row.id}</td>
+                <td className="mono">{row.name}</td>
+                <td className="mono">{row.account_id}</td>
+                <td className="col-actions">
+                  <div className="actions-cell">
+                    <button type="button" className="btn btn-edit">
+                      Update
+                    </button>
+                    <button type="button" className="btn btn-danger">
+                      Delete
+                    </button>
+                  </div>
                 </td>
               </tr>
-            )}
+            ))}
           </tbody>
         </table>
       </div>
