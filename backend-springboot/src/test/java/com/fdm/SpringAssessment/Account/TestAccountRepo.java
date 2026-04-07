@@ -7,12 +7,15 @@ import com.fdm.SpringAssessment.models.Person;
 import com.fdm.SpringAssessment.models.SavingsAccount;
 import com.fdm.SpringAssessment.repository.AccountRepository;
 import com.fdm.SpringAssessment.repository.CustomerRepository;
+import jakarta.transaction.Transactional;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+@Transactional
 @DataJpaTest
 public class TestAccountRepo {
     @Autowired
