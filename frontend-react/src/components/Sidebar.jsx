@@ -10,9 +10,10 @@ function Sidebar() {
         <Link to="/">Home</Link>
         <Link to="/create-customer">Create Corporate Customer</Link>
         <Link to="/customers">Customers</Link>
-        <Link to="/create-customer">Create Account</Link>
-        <Link to="/accounts">Accounts</Link>
-        {/* Note: find-by-id routes removed from sidebar per request; use display pages' top-of-table find input */}
+        <Link to="/find-by-id">Find Customer</Link>
+        <Link to="/create-customer">Create Corporate Customer</Link>
+        <Link to="/customers">Customers</Link>
+        <Link to="/find-by-id">Find Customer</Link>
       </nav>
     </aside>
   );
