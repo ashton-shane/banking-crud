@@ -1,5 +1,6 @@
 package com.fdm.SpringAssessment.controllers;
 
+import com.fdm.SpringAssessment.DTO.CustomerDTO;
 import com.fdm.SpringAssessment.models.Address;
 import com.fdm.SpringAssessment.models.Customer;
 import com.fdm.SpringAssessment.service.CustomerService;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/")
@@ -19,7 +21,7 @@ public class CustomerController {
     private final CustomerService customerService;
 
     @GetMapping("/customers")
-    public ArrayList<Customer> getCustomers() {
+    public List<CustomerDTO> getCustomers() {
         return customerService.getCustomers();
     }
 
@@ -49,4 +51,6 @@ public class CustomerController {
     public void updateName(@PathVariable long customerId, String name) {
         customerService.updateName(customerId, name);
     }
+
+
 }

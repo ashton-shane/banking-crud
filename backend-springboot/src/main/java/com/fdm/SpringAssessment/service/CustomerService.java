@@ -1,4 +1,6 @@
 package com.fdm.SpringAssessment.service;
+import com.fdm.SpringAssessment.DTO.CustomerDTO;
+import com.fdm.SpringAssessment.models.Account;
 import com.fdm.SpringAssessment.models.Address;
 import com.fdm.SpringAssessment.models.Customer;
 import com.fdm.SpringAssessment.repository.CustomerRepository;
@@ -6,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -17,20 +21,25 @@ public class CustomerService {
     }
 
     public Customer findById(long customerId) {
-        return customerRepository.findById(customerId);
+        return customerRepository.findById(customerId).orElseThrow();
     }
 
     public void deleteById(long customerId) {
         customerRepository.deleteById(customerId);
     }
 
-    public ArrayList<Customer> getCustomers() {
-        return customerRepository.findAll();
+    public List<CustomerDTO> getCustomers() {
+        return customerRepository.findAll()
+                .stream()
+                .map(this::toDTO)
+                .toList();
     }
 
     public void updateAddress(long customerId, Address newAddress) {
-        Customer custToUpdate = customerRepository.findById(customerId);
-        Address addressToUpdate = custToUpdate.getAddress();
+    Optional<Customer> maybeCust = customerRepository.findById(customerId);
+    Customer custToUpdate = maybeCust.orElse(null);
+    if (custToUpdate == null) return;
+    Address addressToUpdate = custToUpdate.getAddress();
 
         // full update for simplicity
         addressToUpdate.setBlockNumber(newAddress.getBlockNumber());
@@ -43,10 +52,29 @@ public class CustomerService {
     }
 
     public void updateName(long customerId, String name) {
-        Customer custToUpdate = customerRepository.findById(customerId);
-        custToUpdate.setName(name);
+    Optional<Customer> maybeCust2 = customerRepository.findById(customerId);
+    Customer custToUpdate2 = maybeCust2.orElse(null);
+    if (custToUpdate2 == null) return;
+    custToUpdate2.setName(name);
 
-        customerRepository.save(custToUpdate);
+    customerRepository.save(custToUpdate2);
+    }
+
+    public CustomerDTO toDTO(Customer customer) {
+        return CustomerDTO.builder()
+                .id(customer.getId())
+                .name(customer.getName())
+                .blockNumber(customer.getAddress().getBlockNumber())
+                .roadName(customer.getAddress().getRoadName())
+                .building(customer.getAddress().getBuilding())
+                .postalCode(customer.getAddress().getPostalCode())
+                .accountIds(
+                        customer.getAccounts()
+                                .stream()
+                                .map(Account::getId)
+                                .toList()
+                )
+                .build();
     }
 }
 

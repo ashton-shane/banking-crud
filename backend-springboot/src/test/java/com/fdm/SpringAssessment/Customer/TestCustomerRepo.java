@@ -26,8 +26,8 @@ public class TestCustomerRepo {
                 .build();
         Person person = new Person("Ash", address);
 
-        customerRepository.save(person);
-        Customer foundCust = customerRepository.findById(person.getId());
+    customerRepository.save(person);
+    Customer foundCust = customerRepository.findById(person.getId()).orElse(null);
 
         assertEquals("Ash", foundCust.getName());
     }
@@ -69,9 +69,9 @@ public class TestCustomerRepo {
                 .postalCode("018980")
                 .build();
         Person person = new Person("Ash", address);
-        customerRepository.save(person);
-        long custId = person.getId();
-        customerRepository.deleteById(custId);
-        assertNull(customerRepository.findById(custId));
+    customerRepository.save(person);
+    long custId = person.getId();
+    customerRepository.deleteById(custId);
+    assertNull(customerRepository.findById(custId).orElse(null));
     }
 }

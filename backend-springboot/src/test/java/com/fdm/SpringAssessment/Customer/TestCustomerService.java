@@ -14,6 +14,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -44,6 +45,8 @@ public class TestCustomerService {
 
     @Test
     public void verifyCallOnce_whenCallingFindById() {
+        when(customerRepository.findById(person.getId()))
+                .thenReturn(Optional.of(person));
         customerService.findById(person.getId());
         verify(customerRepository).findById(person.getId());
     }
@@ -51,8 +54,8 @@ public class TestCustomerService {
     @Test
     public void returnsName_whenCallingFindById() {
         long custId = person.getId();
-        when(customerRepository.findById(custId)).thenReturn(person);
-        assertEquals("Ash", customerService.findById(custId).getName());
+    when(customerRepository.findById(custId)).thenReturn(java.util.Optional.of(person));
+    assertEquals("Ash", customerService.findById(custId).getName());
     }
 
     @Test
@@ -85,7 +88,7 @@ public class TestCustomerService {
     @Test
     public void verifyFindByIdAndSave_whenCallingUpdateName() {
         long customerId = 42L;
-        when(customerRepository.findById(customerId)).thenReturn(person);
+    when(customerRepository.findById(customerId)).thenReturn(java.util.Optional.of(person));
 
         customerService.updateName(customerId, "River");
 
@@ -97,7 +100,7 @@ public class TestCustomerService {
     @Test
     public void updatesAddressFieldsAndSaves_whenCallingUpdateAddress() {
         long customerId = person.getId();
-        when(customerRepository.findById(customerId)).thenReturn(person);
+    when(customerRepository.findById(customerId)).thenReturn(java.util.Optional.of(person));
 
         Address newAddress = Address.builder()
                 .blockNumber("1")
@@ -122,7 +125,7 @@ public class TestCustomerService {
     @Test
     public void clearsBuildingOnAddress_whenUpdateAddressWithNullBuilding() {
         long customerId = person.getId();
-        when(customerRepository.findById(customerId)).thenReturn(person);
+    when(customerRepository.findById(customerId)).thenReturn(java.util.Optional.of(person));
 
         Address newAddress = Address.builder()
                 .blockNumber("10")
