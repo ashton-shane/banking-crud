@@ -22,7 +22,7 @@ function CustomersList({ customers }) {
             <tr>
               <th scope="col">Customer Id</th>
               <th scope="col">Customer Name</th>
-              <th scope="col">Account Id</th>
+              <th scope="col">Account Ids</th>
               <th scope="col" className="col-actions">
                 Actions
               </th>
@@ -33,7 +33,7 @@ function CustomersList({ customers }) {
               <tr key={row.id}>
                 <td className="mono">{row.id}</td>
                 <td className="mono">{row.name}</td>
-                <td className="mono">{row.account_id}</td>
+                <td className="mono">{row.accountIds.join(", ")}</td>
                 <td className="col-actions">
                   <div className="actions-cell">
                     <button type="button" className="btn btn-edit">

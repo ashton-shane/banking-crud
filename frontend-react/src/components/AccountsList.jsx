@@ -20,6 +20,7 @@ function AccountsList({ accounts, onUpdate = () => {}, onDelete = () => {} }) {
           <thead>
             <tr>
               <th scope="col">Account Id</th>
+              <th scope="col">Customer Name</th>
               <th scope="col">Account Balance</th>
               <th scope="col">Account Type</th>
               <th scope="col" className="col-actions">
@@ -31,6 +32,7 @@ function AccountsList({ accounts, onUpdate = () => {}, onDelete = () => {} }) {
             {accounts.map((row) => (
               <tr key={row.id}>
                 <td className="mono">{row.id}</td>
+                <td className="mono">{row.customerName}</td>
                 <td className="mono">{row.balance.toFixed(2)}</td>
                 <td className="mono">{row.accountType}</td>
                 <td className="col-actions">

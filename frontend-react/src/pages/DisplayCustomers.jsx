@@ -2,26 +2,24 @@ import { useState, useEffect } from "react";
 import "../styles/inline.css";
 import { useNavigate } from "react-router-dom";
 import CustomersList from "../components/CustomersList"
+import axios from "axios";
 
 const DisplayCustomers = () => {
-      const customers = [
-      { id: 1, name: "Ash", account_id: 1 },
-      { id: 2, name: "Ash", account_id:  2 },
-      { id: 3, name: "Ash", account_id:  1 },
-      { id: 4, name: "Ash", account_id:  2 },
-      { id: 5, name: "Ash", account_id: 1 },
-      { id: 6, name: "Ash", account_id: 3},
-      { id: 7, name: "Ash", account_id:  1 },
-      { id: 8, name: "Ash", account_id:  2 },
-    ];
+    const [customers, setCustomers] = useState([]);
 
-  return (
-    <div>
+        useEffect(() => {
+          axios.get("http://localhost:8080/customers")
+          .then(res => setCustomers(res.data))
+          .catch(error => console.error("Error:", error));
+      }, [])
 
-      <CustomersList customers={customers} />
+    return (
+      <div>
 
-    </div>
-  )
+        <CustomersList customers={customers} />
+
+      </div>
+    )
 }
 
 export default DisplayCustomers
