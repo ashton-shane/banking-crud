@@ -1,9 +1,24 @@
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
+
 const FindCustomer = () => {
-  const row = {
-    id: 1,
-    name: "Ash",
-    accountIds: [1, 2],
-  };
+  const { id } = useParams();
+  const [custRow, setCustRow] = useState({
+    id: "-",
+    name: "-",
+    accountIds: ["-"],
+  });
+
+  useEffect(() => {
+    axios
+      .get(`/api/customers/${id}`)
+      .then((res) => {
+        console.log(res);
+        setCustRow(res.data);
+      })
+      .catch((error) => "Error: " + error);
+  }, [id]);
 
   return (
     <main className="main">
@@ -21,10 +36,10 @@ const FindCustomer = () => {
             </tr>
           </thead>
           <tbody>
-            <tr key={row.id}>
-              <td className="mono">{row.id}</td>
-              <td className="mono">{row.name}</td>
-              <td className="mono">{row.accountIds.join(", ")}</td>
+            <tr key={custRow.id}>
+              <td className="mono">{custRow.id}</td>
+              <td className="mono">{custRow.name}</td>
+              <td className="mono">{custRow.accountIds.join(", ")}</td>
               <td className="col-actions">
                 <div className="actions-cell">
                   <button type="button" className="btn btn-edit">

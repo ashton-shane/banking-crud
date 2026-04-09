@@ -9,7 +9,7 @@ const DisplayAccounts = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/accounts")
+      .get("/api/accounts")
       .then((res) => setAccounts(res.data))
       .catch((error) => console.error("Error:", error));
   }, []);

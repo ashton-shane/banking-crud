@@ -17,13 +17,13 @@ import java.util.List;
 public class CustomerController {
     private final CustomerService customerService;
 
-    @GetMapping("/customers")
+    @GetMapping("/api/customers")
     public List<CustomerDTO> getCustomers() {
         return customerService.getCustomers();
     }
 
     // singular customer route (requested): /customer/{id}
-    @GetMapping("/customers/{customerId}")
+    @GetMapping("/api/customers/{customerId}")
     public CustomerDTO findById(@PathVariable long customerId) {
         return customerService.findById(customerId);
     }

@@ -16,12 +16,12 @@ import java.util.List;
 public class AccountController {
     private final AccountService accountService;
 
-    @GetMapping("/accounts")
+    @GetMapping("/api/accounts")
     public List<AccountDTO> getAccounts() {
         return accountService.getAccounts();
     }
 
-    @GetMapping("/accounts/{accountId}")
+    @GetMapping("/api/accounts/{accountId}")
     public AccountDTO findById(@PathVariable long accountId) {
         return accountService.findById(accountId);
     }

@@ -2,11 +2,11 @@ import SearchBar from "./SearchBar";
 import { useNavigate } from "react-router-dom";
 
 function CustomersList({ customers }) {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    const handleSearch = (id) => {
-        navigate(`/customers/${id}`) // 👈 route for accounts
-    }
+  const handleSearch = (id) => {
+    navigate(`/customers/${id}`); // 👈 route for accounts
+  };
 
   return (
     <main className="main">
@@ -18,10 +18,7 @@ function CustomersList({ customers }) {
             Add New Customer
           </button>
           <div className="toolbar-search">
-            <SearchBar 
-              compact 
-              onSearch={handleSearch}
-            />
+            <SearchBar compact onSearch={handleSearch} />
           </div>
         </div>
       </div>
@@ -43,7 +40,7 @@ function CustomersList({ customers }) {
               <tr key={row.id}>
                 <td className="mono">{row.id}</td>
                 <td className="mono">{row.name}</td>
-                <td className="mono">{ row.accountIds.join(", ")}</td>
+                <td className="mono">{row.accountIds.join(", ")}</td>
                 <td className="col-actions">
                   <div className="actions-cell">
                     <button type="button" className="btn btn-edit">

@@ -9,7 +9,7 @@ const DisplayCustomers = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/customers")
+      .get("/api/customers")
       .then((res) => setCustomers(res.data))
       .catch((error) => console.error("Error:", error));
   }, []);

@@ -6,7 +6,9 @@ import com.fdm.SpringAssessment.models.Account;
 import com.fdm.SpringAssessment.models.Customer;
 import com.fdm.SpringAssessment.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,7 +26,7 @@ public class AccountService {
     }
 
     public AccountDTO findById(long accountId) {
-        Account foundAcc = accountRepository.findById(accountId).orElseThrow();
+        Account foundAcc = accountRepository.findById(accountId).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
         return toDTO(foundAcc);
     }
 

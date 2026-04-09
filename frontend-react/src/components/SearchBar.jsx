@@ -2,19 +2,19 @@ import "../styles/inline.css";
 import { useState } from "react";
 
 function SearchBar({ compact = false, onSearch = () => {} }) {
-  const [value, setValue] = useState("");
+  const [searchId, setSearchId] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSearch(value);
+    onSearch(searchId);
   };
 
   return (
     <form className="sidebar-search" role="search" onSubmit={handleSubmit}>
       <input
         type="search"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
+        value={searchId}
+        onChange={(e) => setSearchId(e.target.value)}
         placeholder="Search..."
         aria-label="Search"
       />

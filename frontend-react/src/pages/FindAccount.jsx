@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 import axios from "axios";
 
 const FindAccount = () => {
-    const { accountId } = useParams();
+    const { id } = useParams();
     const [ accountRow, setAccountRow ] = useState(
         {
             "id": "-",
@@ -14,10 +14,13 @@ const FindAccount = () => {
     )
 
     useEffect(() => {
-        axios.get(`/accounts/"${ accountId }`)
-        .then(res => setAccountRow(res.data))
+        axios.get(`/api/accounts/${id}`)
+        .then(res => {
+            console.log(res);
+            setAccountRow(res.data)
+        })
         .catch(error => "Error: " + error);
-    }, [accountId]);
+    }, [id]);
 
     return (
         <main className="main">
