@@ -5,7 +5,9 @@ import com.fdm.SpringAssessment.models.Address;
 import com.fdm.SpringAssessment.models.Customer;
 import com.fdm.SpringAssessment.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +22,11 @@ public class CustomerService {
         customerRepository.save(customer);
     }
 
-    public Customer findById(long customerId) {
-        return customerRepository.findById(customerId).orElseThrow();
+    public CustomerDTO findById(long customerId) {
+        Customer cust = customerRepository.findById(customerId).orElseThrow(() -> new ResponseStatusException(
+                HttpStatus.NOT_FOUND, "Customer not found")
+        );
+        return toDTO(cust);
     }
 
     public void deleteById(long customerId) {

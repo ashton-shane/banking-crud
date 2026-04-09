@@ -1,5 +1,6 @@
 package com.fdm.SpringAssessment.Customer;
 
+import com.fdm.SpringAssessment.DTO.CustomerDTO;
 import com.fdm.SpringAssessment.models.Address;
 import com.fdm.SpringAssessment.models.Person;
 import com.fdm.SpringAssessment.repository.CustomerRepository;
@@ -41,13 +42,13 @@ public class TestCustomerMVC {
 
     @Test
     public void returnsListOfCustomers_whenCallingCustomersEndpoint() {
-        ResponseEntity<Person[]> response = restTemplate.getForEntity("/customers", Person[].class);
+        ResponseEntity<CustomerDTO[]> response = restTemplate.getForEntity("/customers", CustomerDTO[].class);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
-        Person[] customers = response.getBody();
+        CustomerDTO[] customers = response.getBody();
         assertNotNull(customers);
         assertTrue(customers.length > 0);
         assertEquals("Ash", customers[0].getName());
-        assertEquals("42 Serangoon Ave, SG", customers[0].getAddress().getFullAddress());
+        assertEquals("42 Serangoon Ave, SG", customers[0].getFullAddress());
     }
 }

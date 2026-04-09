@@ -1,15 +1,25 @@
 import "../styles/inline.css";
+import { useState } from "react";
 
-function SearchBar({ compact = false }) {
-  const formClass = compact ? "sidebar-search compact" : "sidebar-search";
+function SearchBar({ compact = false, onSearch = () => {} }) {
+  const [value, setValue] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSearch(value);
+  };
+
   return (
-    <form className={formClass} role="search" onSubmit={(e) => e.preventDefault()}>
-      <input type="search" placeholder="Search..." aria-label="Search" />
+    <form className="sidebar-search" role="search" onSubmit={handleSubmit}>
+      <input
+        type="search"
+        value={value}
+        onChange={(e) => setValue(e.target.value)}
+        placeholder="Search..."
+        aria-label="Search"
+      />
       <button type="submit" title="Search" aria-label="Search">
-        <svg className="search-icon" viewBox="0 0 24 24" aria-hidden>
-          <circle cx="11" cy="11" r="7" />
-          <path d="m21 21-4.3-4.3" />
-        </svg>
+        <span className="search-icon" aria-hidden="true" />
       </button>
     </form>
   );

@@ -21,10 +21,9 @@ public class AccountController {
         return accountService.getAccounts();
     }
 
-    // singular account route requested: /account/{id}
-    @GetMapping("/account/{accountId}")
-    public Account findById(@PathVariable long accountId) {
-        return accountService.findById(accountId).orElseThrow();
+    @GetMapping("/accounts/{accountId}")
+    public AccountDTO findById(@PathVariable long accountId) {
+        return accountService.findById(accountId);
     }
 
     @GetMapping("/accounts/create")
@@ -37,12 +36,4 @@ public class AccountController {
         accountService.deleteById(accountId);
     }
 
-    @org.springframework.web.bind.annotation.PostMapping("/accounts/{accountId}/update")
-    public void updateAccountBalance(@PathVariable long accountId, @org.springframework.web.bind.annotation.RequestBody Account payload) {
-        Account existing = accountService.findById(accountId).orElseThrow();
-        if (existing != null) {
-            existing.setBalance(payload.getBalance());
-            accountService.createAccount(existing);
-        }
-    }
 }

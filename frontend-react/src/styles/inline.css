@@ -13,7 +13,7 @@
   padding: 1rem;
   background: #fff;
   border-radius: 6px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
 }
 .modal .spaced {
   margin-top: 1rem;
@@ -29,13 +29,14 @@
   margin: 0;
 }
 .search-icon {
+  display: inline-block;
   width: 18px;
   height: 18px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 2.2px;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 18px 18px;
+  /* inline SVG data URL for the magnifying glass icon (white stroke so it shows on teal button) */
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23ffffff' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='7'/><path d='m21 21-4.3-4.3'/></svg>");
 }
 
 /* toolbar layout helpers */
@@ -72,9 +73,11 @@
 .sidebar-search input {
   border: none;
   outline: none;
-  padding: 8px 10px;
+  padding: 8px 12px;
   background: white;
-  border-radius: 10px;
+  border-radius: 8px;
+  height: 32px;
+  box-sizing: border-box;
 }
 
 .sidebar-search button {
@@ -82,7 +85,7 @@
   background: #06b6a4; /* teal */
   color: #fff;
   width: 40px;
-  height: 36px;
+  height: 40px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -96,3 +99,14 @@
   height: 18px;
 }
 
+/* ensure the icon is visible and centered inside the button */
+.sidebar-search button .search-icon {
+  display: inline-block;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* ensure the span inside the button is rendered and centered */
+.sidebar-search button .search-icon {
+  display: inline-block;
+}

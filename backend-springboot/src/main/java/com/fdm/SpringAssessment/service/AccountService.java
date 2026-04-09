@@ -1,7 +1,9 @@
 package com.fdm.SpringAssessment.service;
 
 import com.fdm.SpringAssessment.DTO.AccountDTO;
+import com.fdm.SpringAssessment.DTO.CustomerDTO;
 import com.fdm.SpringAssessment.models.Account;
+import com.fdm.SpringAssessment.models.Customer;
 import com.fdm.SpringAssessment.repository.AccountRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -9,6 +11,8 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 @RequiredArgsConstructor
@@ -19,8 +23,9 @@ public class AccountService {
         accountRepository.save(account);
     }
 
-    public Optional<Account> findById(long accountId) {
-        return accountRepository.findById(accountId);
+    public AccountDTO findById(long accountId) {
+        Account foundAcc = accountRepository.findById(accountId).orElseThrow();
+        return toDTO(foundAcc);
     }
 
     public void deleteById(long accountId) {
@@ -30,13 +35,17 @@ public class AccountService {
     public List<AccountDTO> getAccounts() {
         return accountRepository.findAll()
                 .stream()
-                .map(account -> new AccountDTO(
-                        account.getId(),
-                        account.getBalance(),
-                        account.getAccountType(),
-                        account.getCustomer().getId(),
-                        account.getCustomer().getName()
-                ))
+                .map(this::toDTO)
                 .toList();
+    }
+
+    public AccountDTO toDTO(Account account) {
+        return AccountDTO.builder()
+                .id(account.getId())
+                .balance(account.getBalance())
+                .accountType(account.getAccountType())
+                .customerId(account.getCustomer().getId())
+                .customerName(account.getCustomer().getName())
+                .build();
     }
 }

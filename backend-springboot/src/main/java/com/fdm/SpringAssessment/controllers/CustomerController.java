@@ -5,17 +5,14 @@ import com.fdm.SpringAssessment.models.Address;
 import com.fdm.SpringAssessment.models.Customer;
 import com.fdm.SpringAssessment.service.CustomerService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 @RequestMapping("/")
-@org.springframework.web.bind.annotation.CrossOrigin(origins = "http://localhost:5173")
+@CrossOrigin(origins = "http://localhost:5173")
 @RequiredArgsConstructor
 public class CustomerController {
     private final CustomerService customerService;
@@ -26,8 +23,8 @@ public class CustomerController {
     }
 
     // singular customer route (requested): /customer/{id}
-    @GetMapping("/customer/{customerId}")
-    public Customer findById(@PathVariable long customerId) {
+    @GetMapping("/customers/{customerId}")
+    public CustomerDTO findById(@PathVariable long customerId) {
         return customerService.findById(customerId);
     }
 
@@ -37,7 +34,7 @@ public class CustomerController {
         customerService.createCustomer(customer);
     }
 
-    @GetMapping("/customers/delete/{customerId}")
+    @DeleteMapping("/customers")
     public void deleteCustomer(@PathVariable long customerId) {
         customerService.deleteById(customerId);
     }

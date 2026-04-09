@@ -1,6 +1,13 @@
 import SearchBar from "./SearchBar";
+import { useNavigate } from "react-router-dom";
 
-function AccountsList({ accounts, onUpdate = () => {}, onDelete = () => {} }) {
+function AccountsList({ accounts }) {
+    const navigate = useNavigate();
+
+    const handleSearch = (id) => {
+        navigate(`/accounts/${id}`);
+    };
+
   return (
     <main className="main">
       <h2>View All Accounts</h2>
@@ -10,7 +17,9 @@ function AccountsList({ accounts, onUpdate = () => {}, onDelete = () => {} }) {
             Add New Account
           </button>
           <div className="toolbar-search">
-            <SearchBar compact />
+            <SearchBar 
+              compact 
+              onSearch={handleSearch} />
           </div>
         </div>
       </div>
@@ -37,10 +46,16 @@ function AccountsList({ accounts, onUpdate = () => {}, onDelete = () => {} }) {
                 <td className="mono">{row.accountType}</td>
                 <td className="col-actions">
                   <div className="actions-cell">
-                    <button type="button" className="btn btn-edit" onClick={() => onUpdate(row)}>
+                    <button
+                      type="button"
+                      className="btn btn-edit"
+                    >
                       Update
                     </button>
-                    <button type="button" className="btn btn-danger" onClick={() => onDelete(row)}>
+                    <button
+                      type="button"
+                      className="btn btn-danger"
+                    >
                       Delete
                     </button>
                   </div>

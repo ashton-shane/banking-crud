@@ -1,10 +1,23 @@
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom"
+import axios from "axios";
+
 const FindAccount = () => {
-    const row = {
-        id: 1,
-        customerName: "Ash",
-        balance: 100.0,
-        accountType: "SAVINGS"
-    }
+    const { accountId } = useParams();
+    const [ accountRow, setAccountRow ] = useState(
+        {
+            "id": "-",
+            "name": "-",
+            "balance": 0,
+            "accountType": "-"
+        }
+    )
+
+    useEffect(() => {
+        axios.get(`/accounts/"${ accountId }`)
+        .then(res => setAccountRow(res.data))
+        .catch(error => "Error: " + error);
+    }, [accountId]);
 
     return (
         <main className="main">
@@ -21,11 +34,11 @@ const FindAccount = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr key={row.id}>
-                            <td className="mono">{row.id}</td>
-                            <td className="mono">{row.customerName}</td>
-                            <td className="mono">{row.balance.toFixed(2)}</td>
-                            <td className="mono">{row.accountType}</td>
+                        <tr key={accountRow.id}>
+                            <td className="mono">{accountRow.id}</td>
+                            <td className="mono">{accountRow.customerName}</td>
+                            <td className="mono">{accountRow.balance.toFixed(2)}</td>
+                            <td className="mono">{accountRow.accountType}</td>
                             <td className="col-actions">
                                 <div className="actions-cell">
                                     <button type="button" className="btn btn-edit">Update</button>
