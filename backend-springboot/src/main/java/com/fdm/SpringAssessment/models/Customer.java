@@ -23,7 +23,7 @@ public abstract class Customer {
     @JoinColumn(name = "address_id")
     private Address address;
 
-    @OneToMany(mappedBy = "customer")
+    @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Account> accounts = new ArrayList<>();
 
     // constructor

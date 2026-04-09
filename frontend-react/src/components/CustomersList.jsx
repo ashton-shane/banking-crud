@@ -1,12 +1,7 @@
 import SearchBar from "./SearchBar";
-import { useNavigate } from "react-router-dom";
 
-function CustomersList({ customers }) {
-  const navigate = useNavigate();
 
-  const handleSearch = (id) => {
-    navigate(`/customers/${id}`); // 👈 route for accounts
-  };
+function CustomersList({ customers, handleSearch, handleDelete }) {
 
   return (
     <main className="main">
@@ -46,7 +41,9 @@ function CustomersList({ customers }) {
                     <button type="button" className="btn btn-edit">
                       Update
                     </button>
-                    <button type="button" className="btn btn-danger">
+                    <button type="button" 
+                      className="btn btn-danger"
+                      onClick={() => handleDelete(row.id)}>
                       Delete
                     </button>
                   </div>

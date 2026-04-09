@@ -6,6 +6,20 @@ import axios from "axios";
 
 const DisplayCustomers = () => {
   const [customers, setCustomers] = useState([]);
+  const navigate = useNavigate();
+
+  const handleSearch = (id) => {
+    navigate(`/customers/${id}`); // 👈 route for accounts
+  };
+
+  const handleDelete = (id) => {
+    axios
+      .delete(`/api/customers/${id}`)
+      .then(() => {
+        setCustomers(prev => prev.filter(acc => acc.id !== id));
+      })
+      .catch((err) => console.error(err));
+  };
 
   useEffect(() => {
     axios
@@ -16,7 +30,11 @@ const DisplayCustomers = () => {
 
   return (
     <div>
-      <CustomersList customers={customers} />
+      <CustomersList 
+        customers={customers}
+        handleSearch={handleSearch}
+        handleDelete={handleDelete} 
+      />
     </div>
   );
 };

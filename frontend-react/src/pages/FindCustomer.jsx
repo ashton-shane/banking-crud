@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const FindCustomer = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+  
   const [custRow, setCustRow] = useState({
     id: "-",
     name: "-",
@@ -14,11 +16,19 @@ const FindCustomer = () => {
     axios
       .get(`/api/customers/${id}`)
       .then((res) => {
-        console.log(res);
         setCustRow(res.data);
       })
       .catch((error) => "Error: " + error);
-  }, [id]);
+  }, []);
+
+  const handleDelete = (id) => {
+    axios
+      .delete(`/api/customers/${id}`)
+      .then(() => {
+        navigate("/customers");
+      })
+      .catch((err) => console.error(err));
+  };
 
   return (
     <main className="main">
@@ -45,7 +55,11 @@ const FindCustomer = () => {
                   <button type="button" className="btn btn-edit">
                     Update
                   </button>
-                  <button type="button" className="btn btn-danger">
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={() => handleDelete(custRow.id)}
+                  >
                     Delete
                   </button>
                 </div>

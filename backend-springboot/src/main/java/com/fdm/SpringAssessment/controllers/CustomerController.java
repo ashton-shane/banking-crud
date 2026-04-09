@@ -11,19 +11,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/api/customers")
 @CrossOrigin(origins = "http://localhost:5173")
 @RequiredArgsConstructor
 public class CustomerController {
     private final CustomerService customerService;
 
-    @GetMapping("/api/customers")
+    @GetMapping
     public List<CustomerDTO> getCustomers() {
         return customerService.getCustomers();
     }
 
     // singular customer route (requested): /customer/{id}
-    @GetMapping("/api/customers/{customerId}")
+    @GetMapping("/{customerId}")
     public CustomerDTO findById(@PathVariable long customerId) {
         return customerService.findById(customerId);
     }
@@ -34,7 +34,7 @@ public class CustomerController {
         customerService.createCustomer(customer);
     }
 
-    @DeleteMapping("/customers")
+    @DeleteMapping("/{customerId}")
     public void deleteCustomer(@PathVariable long customerId) {
         customerService.deleteById(customerId);
     }

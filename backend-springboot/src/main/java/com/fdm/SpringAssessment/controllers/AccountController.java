@@ -10,18 +10,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/api/accounts")
 @CrossOrigin(origins = "http://localhost:5173")
 @RequiredArgsConstructor
 public class AccountController {
     private final AccountService accountService;
 
-    @GetMapping("/api/accounts")
+    @GetMapping
     public List<AccountDTO> getAccounts() {
         return accountService.getAccounts();
     }
 
-    @GetMapping("/api/accounts/{accountId}")
+    @GetMapping("/{accountId}")
     public AccountDTO findById(@PathVariable long accountId) {
         return accountService.findById(accountId);
     }
@@ -31,7 +31,7 @@ public class AccountController {
         accountService.createAccount(account);
     }
 
-    @GetMapping("/accounts/delete/{accountId}")
+    @DeleteMapping("/{accountId}")
     public void deleteAccount(@PathVariable long accountId) {
         accountService.deleteById(accountId);
     }
