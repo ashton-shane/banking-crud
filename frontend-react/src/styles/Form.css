@@ -1,0 +1,36 @@
+/* Base btn to align with general project button styling (keeps parity with modal.css .btn) */
+.btn {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Primary/add action button used for Add New Customer and Create */
+.btn-add {
+  background: #10b981; /* green accent - adjust if your Add button uses a different color */
+  color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  min-width: 96px;
+  padding: 10px 14px;
+  box-shadow: 0 4px 10px rgba(16, 185, 129, 0.12);
+}
+
+/* Hover/focus states to match interactive feel */
+.btn-add:hover {
+  filter: brightness(0.95);
+}
+
+.btn-add:active {
+  transform: translateY(1px);
+}
+
+.btn-add:focus {
+  outline: 3px solid rgba(16, 185, 129, 0.18);
+  outline-offset: 2px;
+}

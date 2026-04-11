@@ -3,6 +3,7 @@ import com.fdm.SpringAssessment.DTO.CustomerDTO;
 import com.fdm.SpringAssessment.models.Account;
 import com.fdm.SpringAssessment.models.Address;
 import com.fdm.SpringAssessment.models.Customer;
+import com.fdm.SpringAssessment.models.Person;
 import com.fdm.SpringAssessment.repository.CustomerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,7 +19,8 @@ import java.util.Optional;
 public class CustomerService {
     private final CustomerRepository customerRepository;
 
-    public void createCustomer(Customer customer) {
+    public void createCustomer(CustomerDTO customerDTO) {
+        Customer customer = toPerson(customerDTO);
         customerRepository.save(customer);
     }
 
@@ -65,6 +67,7 @@ public class CustomerService {
     customerRepository.save(custToUpdate2);
     }
 
+    // HELPERS
     public CustomerDTO toDTO(Customer customer) {
         return CustomerDTO.builder()
                 .id(customer.getId())
@@ -80,6 +83,17 @@ public class CustomerService {
                                 .toList()
                 )
                 .build();
+    }
+    public Customer toPerson(CustomerDTO dto) {
+        Address address = Address.builder()
+                .blockNumber(dto.getBlockNumber())
+                .roadName(dto.getRoadName())
+                .building(dto.getBuilding())
+                .postalCode(dto.getPostalCode())
+                .fullAddress(dto.getFullAddress())
+                .build();
+
+        return new Person(dto.getName(), address);
     }
 }
 

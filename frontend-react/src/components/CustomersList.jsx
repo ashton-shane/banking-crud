@@ -2,11 +2,14 @@ import CreateCustomerModal from "./CreateCustomerModal";
 import SearchBar from "./SearchBar";
 import { useState } from "react";
 
-function CustomersList({ customers, handleSearch, handleDelete }) {
+function CustomersList({ customers, handleSearch, handleDelete, fetchCustomers }) {
   // === CUSTOMER CREATION MODAL STUFF ===
   const [isOpen, setIsOpen] = useState(false);
   const handleOpenModal = () => setIsOpen(true);
-  const handleCloseModal = () => setIsOpen(false);
+  const handleCloseModal = () => {
+    setIsOpen(false);
+    fetchCustomers();
+  }
 
   return (
     <main className="main">

@@ -1,0 +1,152 @@
+/* overlay: dim background and center the modal */
+.react-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+/* content: use sidebar-like dark background and white text */
+.react-modal-content {
+  background: #0b1220; /* sidebar-like dark color */
+  color: #ffffff; /* white text */
+  width: 92%;
+  max-width: 760px;
+  max-height: 90vh;
+  overflow-y: auto;
+  border-radius: 8px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.6);
+  outline: none;
+  font-family: inherit;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+/* header/body/footer layout inside modal */
+.modal-header {
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.modal-body {
+  margin-bottom: 16px;
+}
+
+/* Make form inputs full width and readable on dark bg */
+.modal-body form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal-body input[type="text"],
+.modal-body input[type="email"],
+.modal-body input[type="number"],
+.modal-body textarea,
+.modal-body select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.03);
+  font-size: 0.95rem;
+  color: #ffffff;
+  box-sizing: border-box;
+}
+
+/* placeholder color */
+.modal-body input::placeholder,
+.modal-body textarea::placeholder {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+/* footer with actions aligned to the right */
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* Button variants tuned for dark modal background */
+.btn {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Secondary / neutral button on dark bg */
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Danger button variant (keeps contrast) */
+.btn-danger {
+  background: #ef4444;
+  color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+/* Primary/add action button retains green accent and white text */
+.btn-add {
+  background: #10b981;
+  color: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  min-width: 96px;
+  padding: 10px 14px;
+  box-shadow: 0 6px 18px rgba(16, 185, 129, 0.12);
+}
+
+/* Hover/focus/active states */
+.btn-add:hover,
+.btn-secondary:hover,
+.btn-danger:hover {
+  filter: brightness(0.95);
+}
+
+.btn-add:active,
+.btn-secondary:active,
+.btn-danger:active {
+  transform: translateY(1px);
+}
+
+.btn-add:focus,
+.btn-secondary:focus,
+.btn-danger:focus {
+  outline: 3px solid rgba(255, 255, 255, 0.06);
+  outline-offset: 2px;
+}
+
+/* specific modal close button tweaks */
+.modal-close-btn {
+  min-width: 84px;
+  color: #fff;
+}
+
+/* ensure long modal content scrolls internally */
+.react-modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+.react-modal-content::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+}

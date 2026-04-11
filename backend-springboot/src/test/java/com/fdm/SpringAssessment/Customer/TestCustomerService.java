@@ -1,5 +1,6 @@
 package com.fdm.SpringAssessment.Customer;
 
+import com.fdm.SpringAssessment.DTO.CustomerDTO;
 import com.fdm.SpringAssessment.models.Address;
 import com.fdm.SpringAssessment.models.Customer;
 import com.fdm.SpringAssessment.models.Person;
@@ -81,7 +82,8 @@ public class TestCustomerService {
 
     @Test
     public void verifyCallOnce_whenCallingCreateCustomer() {
-        customerService.createCustomer(person);
+        CustomerDTO customerDTO = mock(CustomerDTO.class);
+        customerService.createCustomer(customerDTO);
         verify(customerRepository).save(person);
     }
 

@@ -1,113 +1,113 @@
 import { useState } from "react";
 import axios from "axios";
+import "../styles/Form.css";
 
-const CreateCustomerForm = ({ onSuccess }) => {
+const CreateCustomerForm = ({closeModal}) => {
+  // flattened form state (no nested address)
   const [form, setForm] = useState({
     name: "",
-    address: {
-      blockNumber: "",
-      roadName: "",
-      building: "",
-      postalCode: "",
-    },
+    blockNumber: "",
+    roadName: "",
+    building: "",
+    postalCode: "",
+    fullAddress: ""
   });
 
-  // handle name change
-  const handleNameChange = (e) => {
-    setForm((prev) => ({
-      ...prev,
-      name: e.target.value,
-    }));
-  };
-
-  // handle nested address change
-  const handleAddressChange = (e) => {
+  // generic change handler for all inputs (name attr must match state keys)
+  const handleChange = (e) => {
     const { name, value } = e.target;
-
-    setForm((prev) => ({
-      ...prev,
-      address: {
-        ...prev.address,
-        [name]: value,
-      },
-    }));
+    setForm(
+        (prev) => ({ ...prev, [name]: value })
+    );
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    // payload is the flattened form and matches CustomerDTO
     axios
-      .post("/api/customers", form)
+      .post("/api/customers/create", form)
       .then((res) => {
-        console.log("Customer created:", res.data);
+        console.log("Customer created: " + res.data);
+        closeModal();
 
-        // optional: notify parent
-        if (onSuccess) onSuccess(res.data);
-
-        // reset form
+        // reset to same flattened shape
         setForm({
           name: "",
-          address: {
-            blockNumber: "",
-            roadName: "",
-            building: "",
-            postalCode: "",
-          },
+          blockNumber: "",
+          roadName: "",
+          building: "",
+          postalCode: "",
+          fullAddress: "",
         });
+
       })
-      .catch((err) => console.error(err));
+      .catch((err) => {
+        console.error("Create customer failed: ", err.response?.data ?? err.message);
+      });
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Create Customer</h2>
+      <h4>Name</h4>
 
-      {/* Name */}
       <input
         type="text"
+        name="name"
         placeholder="Name"
         value={form.name}
-        onChange={handleNameChange}
+        onChange={handleChange}
         required
       />
 
-      <h3>Address</h3>
+      <h4>Address</h4>
 
       <input
         type="text"
         name="blockNumber"
         placeholder="Block Number"
-        value={form.address.blockNumber}
-        onChange={handleAddressChange}
+        value={form.blockNumber}
+        onChange={handleChange}
       />
 
       <input
         type="text"
         name="roadName"
         placeholder="Road Name"
-        value={form.address.roadName}
-        onChange={handleAddressChange}
+        value={form.roadName}
+        onChange={handleChange}
       />
 
       <input
         type="text"
         name="building"
         placeholder="Building"
-        value={form.address.building}
-        onChange={handleAddressChange}
+        value={form.building}
+        onChange={handleChange}
       />
 
       <input
         type="text"
         name="postalCode"
         placeholder="Postal Code"
-        value={form.address.postalCode}
-        onChange={handleAddressChange}
+        value={form.postalCode}
+        onChange={handleChange}
       />
 
-      <button type="submit">Create</button>
+      <input
+        type="text"
+        name="fullAddress"
+        placeholder="Full Address"
+        value={form.fullAddress}
+        onChange={handleChange}
+      />
+
+      <button type="submit" className="btn btn-add">
+        Create
+      </button>
     </form>
   );
 };
 
 export default CreateCustomerForm;
+ 

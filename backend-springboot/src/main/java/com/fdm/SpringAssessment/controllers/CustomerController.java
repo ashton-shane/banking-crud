@@ -28,10 +28,9 @@ public class CustomerController {
         return customerService.findById(customerId);
     }
 
-    // kept as GETs to avoid changing semantics in this patch — only paths adjusted to avoid mapping collisions
-    @GetMapping("/customers/create")
-    public void createCustomer(Customer customer) {
-        customerService.createCustomer(customer);
+    @PostMapping("/create")
+    public void createCustomer(@RequestBody CustomerDTO customerDTO) {
+        customerService.createCustomer(customerDTO);
     }
 
     @DeleteMapping("/{customerId}")

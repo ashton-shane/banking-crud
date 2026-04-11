@@ -21,11 +21,15 @@ const DisplayCustomers = () => {
       .catch((err) => console.error(err));
   };
 
-  useEffect(() => {
+  const fetchCustomers = () => {
     axios
       .get("/api/customers")
       .then((res) => setCustomers(res.data))
       .catch((error) => console.error("Error:", error));
+  }
+
+  useEffect(() => {
+    fetchCustomers();
   }, []);
 
   return (
@@ -34,6 +38,7 @@ const DisplayCustomers = () => {
         customers={customers}
         handleSearch={handleSearch}
         handleDelete={handleDelete}
+        fetchCustomers={fetchCustomers}
       />
     </div>
   );
