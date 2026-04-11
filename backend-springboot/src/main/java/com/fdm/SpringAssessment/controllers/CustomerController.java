@@ -22,9 +22,8 @@ public class CustomerController {
         return customerService.getCustomers();
     }
 
-    // singular customer route (requested): /customer/{id}
     @GetMapping("/{customerId}")
-    public CustomerDTO findById(@PathVariable long customerId) {
+    public CustomerDTO findById(@PathVariable Long customerId) {
         Customer customer = customerService.findById(customerId);
         return customerService.toDTO(customer);
     }
@@ -35,12 +34,12 @@ public class CustomerController {
     }
 
     @DeleteMapping("/{customerId}")
-    public void deleteCustomer(@PathVariable long customerId) {
+    public void deleteCustomer(@PathVariable Long customerId) {
         customerService.deleteById(customerId);
     }
 
     @GetMapping("/customers/{customerId}/address")
-    public void updateAddress(@PathVariable long customerId, Address address) {
+    public void updateAddress(@PathVariable Long customerId, Address address) {
         customerService.updateAddress(customerId, address);
     }
 

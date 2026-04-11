@@ -24,14 +24,13 @@ public class CustomerService {
         customerRepository.save(customer);
     }
 
-    public Customer findById(long customerId) {
-        Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new ResponseStatusException(
+    public Customer findById(Long customerId) {
+        return customerRepository.findById(customerId).orElseThrow(() -> new ResponseStatusException(
                 HttpStatus.NOT_FOUND, "Customer not found")
         );
-        return customer;
     }
 
-    public void deleteById(long customerId) {
+    public void deleteById(Long customerId) {
         customerRepository.deleteById(customerId);
     }
 

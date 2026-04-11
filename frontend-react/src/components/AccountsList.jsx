@@ -8,9 +8,6 @@ function AccountsList({ accounts, handleDelete, handleSearch }) {
       <h2>View All Accounts</h2>
       <div className="toolbar">
         <div className="toolbar-left">
-          <button type="button" className="btn btn-primary">
-            Add New Account
-          </button>
           <div className="toolbar-search">
             <SearchBar compact onSearch={handleSearch} />
           </div>

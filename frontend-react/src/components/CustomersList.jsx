@@ -89,12 +89,14 @@ function CustomersList({
                     >
                       Create Account
                     </button>
-                    <CreateAccountModal
-                      isOpen={isOpenAM}
-                      closeModal={handleCloseModalAM}
-                      customerId={selectedCustomer.id}
-                      customerName={selectedCustomer.name}
-                    ></CreateAccountModal>
+                    {selectedCustomer && (
+                      <CreateAccountModal
+                        isOpen={isOpenAM}
+                        closeModal={handleCloseModalAM}
+                        customerId={selectedCustomer.id}
+                        customerName={selectedCustomer.name}
+                      ></CreateAccountModal>
+                    )}
                   </div>
                 </td>
               </tr>

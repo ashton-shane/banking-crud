@@ -24,7 +24,9 @@ const DisplayCustomers = () => {
   const fetchCustomers = () => {
     axios
       .get("/api/customers")
-      .then((res) => setCustomers(res.data))
+      .then((res) => {
+        setCustomers(res.data);
+      })
       .catch((error) => console.error("Error:", error));
   }
 
