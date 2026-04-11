@@ -1,5 +1,6 @@
 package com.fdm.SpringAssessment.Account;
 
+import com.fdm.SpringAssessment.DTO.AccountDTO;
 import com.fdm.SpringAssessment.enums.AccountType;
 import com.fdm.SpringAssessment.models.Account;
 import com.fdm.SpringAssessment.models.Address;
@@ -89,7 +90,8 @@ public class TestAccountService {
 
     @Test
     public void verifyCallOnce_whenCallingCreateAccount() {
-        accountService.createAccount(account);
+        AccountDTO accountDTO = mock(AccountDTO.class);
+        accountService.createAccount(accountDTO);
         verify(accountRepository).save(account);
     }
 }

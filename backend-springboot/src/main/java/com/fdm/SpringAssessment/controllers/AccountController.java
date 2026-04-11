@@ -26,9 +26,10 @@ public class AccountController {
         return accountService.findById(accountId);
     }
 
-    @GetMapping("/accounts/create")
-    public void createAccount(Account account) {
-        accountService.createAccount(account);
+    @PostMapping("/create")
+    public void createAccount(@RequestBody AccountDTO accountDTO) {
+        System.out.println("DTO received: " + accountDTO);
+        accountService.createAccount(accountDTO);
     }
 
     @DeleteMapping("/{accountId}")

@@ -24,7 +24,7 @@ public class Address {
     @Builder
     public Address(@NonNull String blockNumber,
                    @NonNull String roadName,
-                   @NonNull String fullAddress,
+                   String fullAddress,
                    @NonNull String postalCode,
                    String building) {
         this.blockNumber = blockNumber;

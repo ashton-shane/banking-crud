@@ -24,11 +24,11 @@ public class CustomerService {
         customerRepository.save(customer);
     }
 
-    public CustomerDTO findById(long customerId) {
-        Customer cust = customerRepository.findById(customerId).orElseThrow(() -> new ResponseStatusException(
+    public Customer findById(long customerId) {
+        Customer customer = customerRepository.findById(customerId).orElseThrow(() -> new ResponseStatusException(
                 HttpStatus.NOT_FOUND, "Customer not found")
         );
-        return toDTO(cust);
+        return customer;
     }
 
     public void deleteById(long customerId) {

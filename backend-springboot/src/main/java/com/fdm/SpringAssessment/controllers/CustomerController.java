@@ -25,7 +25,8 @@ public class CustomerController {
     // singular customer route (requested): /customer/{id}
     @GetMapping("/{customerId}")
     public CustomerDTO findById(@PathVariable long customerId) {
-        return customerService.findById(customerId);
+        Customer customer = customerService.findById(customerId);
+        return customerService.toDTO(customer);
     }
 
     @PostMapping("/create")

@@ -8,10 +8,11 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @AllArgsConstructor
+@NoArgsConstructor
 @Builder
 public class AccountDTO {
 
-    private long id;
+    private Long id;
     private Double balance;
     private AccountType accountType;
 
