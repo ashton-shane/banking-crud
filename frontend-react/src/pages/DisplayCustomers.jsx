@@ -16,7 +16,7 @@ const DisplayCustomers = () => {
     axios
       .delete(`/api/customers/${id}`)
       .then(() => {
-        setCustomers(prev => prev.filter(acc => acc.id !== id));
+        setCustomers((prev) => prev.filter((acc) => acc.id !== id));
       })
       .catch((err) => console.error(err));
   };
@@ -30,10 +30,10 @@ const DisplayCustomers = () => {
 
   return (
     <div>
-      <CustomersList 
+      <CustomersList
         customers={customers}
         handleSearch={handleSearch}
-        handleDelete={handleDelete} 
+        handleDelete={handleDelete}
       />
     </div>
   );

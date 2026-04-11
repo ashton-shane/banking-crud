@@ -1,7 +1,12 @@
+import CreateCustomerModal from "./CreateCustomerModal";
 import SearchBar from "./SearchBar";
-
+import { useState } from "react";
 
 function CustomersList({ customers, handleSearch, handleDelete }) {
+  // === CUSTOMER CREATION MODAL STUFF ===
+  const [isOpen, setIsOpen] = useState(false);
+  const handleOpenModal = () => setIsOpen(true);
+  const handleCloseModal = () => setIsOpen(false);
 
   return (
     <main className="main">
@@ -9,9 +14,17 @@ function CustomersList({ customers, handleSearch, handleDelete }) {
 
       <div className="toolbar">
         <div className="toolbar-left">
-          <button type="button" className="btn btn-primary">
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={handleOpenModal}
+          >
             Add New Customer
           </button>
+          <CreateCustomerModal
+            isOpen={isOpen}
+            closeModal={handleCloseModal}
+          ></CreateCustomerModal>
           <div className="toolbar-search">
             <SearchBar compact onSearch={handleSearch} />
           </div>
@@ -41,9 +54,11 @@ function CustomersList({ customers, handleSearch, handleDelete }) {
                     <button type="button" className="btn btn-edit">
                       Update
                     </button>
-                    <button type="button" 
+                    <button
+                      type="button"
                       className="btn btn-danger"
-                      onClick={() => handleDelete(row.id)}>
+                      onClick={() => handleDelete(row.id)}
+                    >
                       Delete
                     </button>
                   </div>
