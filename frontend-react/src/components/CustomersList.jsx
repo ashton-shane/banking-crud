@@ -1,15 +1,30 @@
 import CreateCustomerModal from "./CreateCustomerModal";
+import CreateAccountModal from "./CreateAccountModal";
 import SearchBar from "./SearchBar";
 import { useState } from "react";
 
-function CustomersList({ customers, handleSearch, handleDelete, fetchCustomers }) {
+function CustomersList({
+  customers,
+  handleSearch,
+  handleDelete,
+  fetchCustomers,
+}) {
   // === CUSTOMER CREATION MODAL STUFF ===
-  const [isOpen, setIsOpen] = useState(false);
-  const handleOpenModal = () => setIsOpen(true);
-  const handleCloseModal = () => {
-    setIsOpen(false);
+  const [isOpenCM, setIsOpenCM] = useState(false);
+  const handleOpenModalCM = () => setIsOpenCM(true);
+  const handleCloseModalCM = () => {
+    setIsOpenCM(false);
     fetchCustomers();
-  }
+  };
+
+  // === ACCOUNT CREATION MODAL STUFF ===
+  const [selectedCustomer, setSelectedCustomer] = useState(null);
+  const [isOpenAM, setIsOpenAM] = useState(false);
+  const handleOpenModalAM = () => setIsOpenAM(true);
+  const handleCloseModalAM = () => {
+    setIsOpenAM(false);
+    fetchCustomers();
+  };
 
   return (
     <main className="main">
@@ -20,13 +35,13 @@ function CustomersList({ customers, handleSearch, handleDelete, fetchCustomers }
           <button
             type="button"
             className="btn btn-primary"
-            onClick={handleOpenModal}
+            onClick={handleOpenModalCM}
           >
             Add New Customer
           </button>
           <CreateCustomerModal
-            isOpen={isOpen}
-            closeModal={handleCloseModal}
+            isOpen={isOpenCM}
+            closeModal={handleCloseModalCM}
           ></CreateCustomerModal>
           <div className="toolbar-search">
             <SearchBar compact onSearch={handleSearch} />
@@ -64,6 +79,22 @@ function CustomersList({ customers, handleSearch, handleDelete, fetchCustomers }
                     >
                       Delete
                     </button>
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      onClick={() => {
+                        setSelectedCustomer(row);
+                        handleOpenModalAM();
+                      }}
+                    >
+                      Create Account
+                    </button>
+                    <CreateAccountModal
+                      isOpen={isOpenAM}
+                      closeModal={handleCloseModalAM}
+                      customerId={selectedCustomer.id}
+                      customerName={selectedCustomer.name}
+                    ></CreateAccountModal>
                   </div>
                 </td>
               </tr>
