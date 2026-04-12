@@ -38,14 +38,9 @@ public class CustomerController {
         customerService.deleteById(customerId);
     }
 
-    @GetMapping("/customers/{customerId}/address")
-    public void updateAddress(@PathVariable Long customerId, Address address) {
-        customerService.updateAddress(customerId, address);
-    }
-
-    @GetMapping("/customers/{customerId}/name")
-    public void updateName(@PathVariable long customerId, String name) {
-        customerService.updateName(customerId, name);
+    @PutMapping("/update/{customerId}")
+    public void updateCustomer(@PathVariable Long customerId, @RequestBody CustomerDTO customerDTO) {
+        customerService.updateCustomer(customerId, customerDTO);
     }
 
 

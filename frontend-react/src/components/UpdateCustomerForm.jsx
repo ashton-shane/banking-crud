@@ -5,6 +5,7 @@ import "../styles/Form.css";
 const UpdateCustomerForm = ({ closeModal, customer }) => {
   // flattened form state (no nested address)
   const [form, setForm] = useState({
+    id: customer.id,
     name: customer.name,
     blockNumber: customer.blockNumber,
     roadName: customer.roadName,
@@ -22,7 +23,6 @@ const UpdateCustomerForm = ({ closeModal, customer }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // payload is the flattened form and matches CustomerDTO
     axios
       .post("/api/customers/update", form)
       .then((res) => {
@@ -31,6 +31,7 @@ const UpdateCustomerForm = ({ closeModal, customer }) => {
 
         // reset to same flattened shape
         setForm({
+          id: customer.id,
           name: customer.name,
           blockNumber: customer.blockNumber,
           roadName: customer.roadName,

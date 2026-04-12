@@ -41,29 +41,22 @@ public class CustomerService {
                 .toList();
     }
 
-    public void updateAddress(long customerId, Address newAddress) {
-    Optional<Customer> maybeCust = customerRepository.findById(customerId);
-    Customer custToUpdate = maybeCust.orElse(null);
+    public void updateCustomer(Long customerId, CustomerDTO customerDTO) {
+    Customer custToUpdate = findById(customerId);
     if (custToUpdate == null) return;
-    Address addressToUpdate = custToUpdate.getAddress();
 
-        // full update for simplicity
-        addressToUpdate.setBlockNumber(newAddress.getBlockNumber());
-        addressToUpdate.setBuilding(newAddress.getBuilding());
-        addressToUpdate.setRoadName(newAddress.getRoadName());
-        addressToUpdate.setPostalCode(newAddress.getPostalCode());
-        addressToUpdate.setFullAddress(newAddress.getFullAddress());
+    Address address = Address.builder()
+        .blockNumber(customerDTO.getBlockNumber())
+        .building(customerDTO.getBuilding())
+        .roadName(customerDTO.getRoadName())
+        .postalCode(customerDTO.getPostalCode())
+        .fullAddress(customerDTO.getFullAddress())
+        .build();
 
-        customerRepository.save(custToUpdate);
-    }
+    custToUpdate.setAddress(address);
+    custToUpdate.setName(customerDTO.getName());
 
-    public void updateName(long customerId, String name) {
-    Optional<Customer> maybeCust2 = customerRepository.findById(customerId);
-    Customer custToUpdate2 = maybeCust2.orElse(null);
-    if (custToUpdate2 == null) return;
-    custToUpdate2.setName(name);
-
-    customerRepository.save(custToUpdate2);
+    customerRepository.save(custToUpdate);
     }
 
     // HELPERS
@@ -75,6 +68,7 @@ public class CustomerService {
                 .roadName(customer.getAddress().getRoadName())
                 .building(customer.getAddress().getBuilding())
                 .postalCode(customer.getAddress().getPostalCode())
+                .fullAddress(customer.getAddress().getFullAddress())
                 .accountIds(
                         customer.getAccounts()
                                 .stream()
