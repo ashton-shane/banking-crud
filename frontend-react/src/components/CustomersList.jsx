@@ -1,5 +1,6 @@
 import CreateCustomerModal from "./CreateCustomerModal";
 import CreateAccountModal from "./CreateAccountModal";
+import UpdateCustomerModal from "./UpdateCustomerModal";
 import SearchBar from "./SearchBar";
 import { useState } from "react";
 
@@ -23,6 +24,14 @@ function CustomersList({
   const handleOpenModalAM = () => setIsOpenAM(true);
   const handleCloseModalAM = () => {
     setIsOpenAM(false);
+    fetchCustomers();
+  };
+
+  // === UPDATE CUSTOMER MODAL STUFF ===
+  const [isOpenUC, setIsOpenUC] = useState(false);
+  const handleOpenModalUC = () => setIsOpenUC(true);
+  const handleCloseModalUC = () => {
+    setIsOpenUC(false);
     fetchCustomers();
   };
 
@@ -69,9 +78,19 @@ function CustomersList({
                 <td className="mono">{row.accountIds.join(", ")}</td>
                 <td className="col-actions">
                   <div className="actions-cell">
-                    <button type="button" className="btn btn-edit">
+                    <button 
+                        type="button" 
+                        className="btn btn-edit"
+                        onClick={handleOpenModalUC}>
                       Update
                     </button>
+                    {selectedCustomer && (
+                      <UpdateCustomerModal
+                        isOpen={isOpenUC}
+                        closeModal={handleCloseModalUC}
+                        customer={selectedCustomer}
+                      ></UpdateCustomerModal>
+                    )}
                     <button
                       type="button"
                       className="btn btn-danger"
