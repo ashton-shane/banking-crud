@@ -1,16 +1,27 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import UpdateCustomerModal from "../components/UpdateCustomerModal"
 
 const FindCustomer = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  
+
   const [custRow, setCustRow] = useState({
     id: "-",
     name: "-",
     accountIds: ["-"],
   });
+
+  // === UPDATE CUSTOMER MODAL STUFF ===
+  const [isOpen, setIsOpen] = useState(false);
+  const handleOpenModal = () => setIsOpen(true);
+  const handleCloseModal = () => {
+    setIsOpen(false);
+    setRefresh((prev) => !prev);
+  };
+
+  const [refresh, setRefresh] = useState(false);
 
   useEffect(() => {
     axios
@@ -19,7 +30,7 @@ const FindCustomer = () => {
         setCustRow(res.data);
       })
       .catch((error) => "Error: " + error);
-  }, []);
+  }, [refresh]);
 
   const handleDelete = (id) => {
     axios
@@ -52,9 +63,18 @@ const FindCustomer = () => {
               <td className="mono">{custRow.accountIds.join(", ")}</td>
               <td className="col-actions">
                 <div className="actions-cell">
-                  <button type="button" className="btn btn-edit">
+                  <button
+                    type="button"
+                    className="btn btn-edit"
+                    onClick={handleOpenModal}
+                  >
                     Update
                   </button>
+                  <UpdateCustomerModal
+                    isOpen={isOpen}
+                    closeModal={handleCloseModal}
+                    customer={custRow}
+                  ></UpdateCustomerModal>
                   <button
                     type="button"
                     className="btn btn-danger"
