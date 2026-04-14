@@ -15,6 +15,7 @@ function CustomersList({
   const handleOpenModalCM = () => setIsOpenCM(true);
   const handleCloseModalCM = () => {
     setIsOpenCM(false);
+    setSelectedCustomer(null);
     fetchCustomers();
   };
 
@@ -24,6 +25,7 @@ function CustomersList({
   const handleOpenModalAM = () => setIsOpenAM(true);
   const handleCloseModalAM = () => {
     setIsOpenAM(false);
+    setSelectedCustomer(null);
     fetchCustomers();
   };
 
@@ -48,10 +50,6 @@ function CustomersList({
           >
             Add New Customer
           </button>
-          <CreateCustomerModal
-            isOpen={isOpenCM}
-            closeModal={handleCloseModalCM}
-          ></CreateCustomerModal>
           <div className="toolbar-search">
             <SearchBar compact onSearch={handleSearch} />
           </div>
@@ -78,19 +76,16 @@ function CustomersList({
                 <td className="mono">{row.accountIds.join(", ")}</td>
                 <td className="col-actions">
                   <div className="actions-cell">
-                    <button 
-                        type="button" 
-                        className="btn btn-edit"
-                        onClick={handleOpenModalUC}>
+                    <button
+                      type="button"
+                      className="btn btn-edit"
+                      onClick={() => {
+                        setSelectedCustomer(row);
+                        handleOpenModalUC();
+                      }}
+                    >
                       Update
                     </button>
-                    {selectedCustomer && (
-                      <UpdateCustomerModal
-                        isOpen={isOpenUC}
-                        closeModal={handleCloseModalUC}
-                        customer={selectedCustomer}
-                      ></UpdateCustomerModal>
-                    )}
                     <button
                       type="button"
                       className="btn btn-danger"
@@ -108,14 +103,6 @@ function CustomersList({
                     >
                       Create Account
                     </button>
-                    {selectedCustomer && (
-                      <CreateAccountModal
-                        isOpen={isOpenAM}
-                        closeModal={handleCloseModalAM}
-                        customerId={selectedCustomer.id}
-                        customerName={selectedCustomer.name}
-                      ></CreateAccountModal>
-                    )}
                   </div>
                 </td>
               </tr>
@@ -123,6 +110,23 @@ function CustomersList({
           </tbody>
         </table>
       </div>
+      {/* Render modals once (not inside each row) */}
+      {isOpenAM && selectedCustomer && (
+        <CreateAccountModal
+          isOpen={isOpenAM}
+          closeModal={handleCloseModalAM}
+          customerId={selectedCustomer.id}
+          customerName={selectedCustomer.name}
+        ></CreateAccountModal>
+      )}
+
+      {isOpenUC && selectedCustomer && (
+        <UpdateCustomerModal
+          isOpen={isOpenUC}
+          closeModal={handleCloseModalUC}
+          customer={selectedCustomer}
+        ></UpdateCustomerModal>
+      )}
     </main>
   );
 }
