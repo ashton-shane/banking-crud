@@ -5,7 +5,6 @@ import "../styles/Form.css";
 const UpdateCustomerForm = ({ closeModal, customer }) => {
   // flattened form state (no nested address)
   const [form, setForm] = useState({
-    id: customer.id,
     name: customer.name,
     blockNumber: customer.blockNumber,
     roadName: customer.roadName,
@@ -24,14 +23,13 @@ const UpdateCustomerForm = ({ closeModal, customer }) => {
     e.preventDefault();
 
     axios
-      .post("/api/customers/update", form)
+      .put(`/api/customers/update/${customer.id}`, form)
       .then((res) => {
         console.log("Customer updated: " + res.data);
         closeModal();
 
         // reset to same flattened shape
         setForm({
-          id: customer.id,
           name: customer.name,
           blockNumber: customer.blockNumber,
           roadName: customer.roadName,
@@ -104,7 +102,7 @@ const UpdateCustomerForm = ({ closeModal, customer }) => {
       />
 
       <button type="submit" className="btn btn-add">
-        Create
+        Update
       </button>
     </form>
   );
