@@ -50,6 +50,10 @@ function CustomersList({
           >
             Add New Customer
           </button>
+          <CreateCustomerModal
+            isOpen={isOpenCM}
+            closeModal={handleCloseModalCM}
+          />
           <div className="toolbar-search">
             <SearchBar compact onSearch={handleSearch} />
           </div>
