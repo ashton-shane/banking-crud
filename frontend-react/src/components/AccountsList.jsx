@@ -1,8 +1,27 @@
 import SearchBar from "./SearchBar";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import axios from "axios";
+import DepositModal from "./DepositModal";
 
-function AccountsList({ accounts, handleDelete, handleSearch }) {
+function AccountsList({ accounts, handleDelete, handleSearch, fetchAccounts }) {
+  const [selectedAccount, setSelectedAccount] = useState("");
+
+  // === DEPOSIT MODAL STUFF ===
+  const [isOpenDep, setIsOpenDep] = useState(false);
+  const handleOpenModalDep = () => setIsOpenDep(true);
+  const handleCloseModalDep = () => {
+    setIsOpenDep(false);
+    fetchAccounts();
+  };
+
+  // === WITHDRAW MODAL STUFF ===
+  const [isOpenWdraw, setIsOpenWdraw] = useState(false);
+  const handleOpenModalWdraw = () => setIsOpenWdraw(true);
+  const handleCloseModalWdraw = () => {
+    setIsOpenWdraw(false);
+    fetchAccounts();
+  };
+
   return (
     <main className="main">
       <h2>View All Accounts</h2>
@@ -32,12 +51,24 @@ function AccountsList({ accounts, handleDelete, handleSearch }) {
               <tr key={row.id}>
                 <td className="mono">{row.id}</td>
                 <td className="mono">{row.customerName}</td>
-                <td className="mono">{row.balance ? row.balance.toFixed(2) : "-"}</td>
+                <td className="mono">
+                  {row.balance ? row.balance.toFixed(2) : "-"}
+                </td>
                 <td className="mono">{row.accountType}</td>
                 <td className="col-actions">
                   <div className="actions-cell">
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      onClick={() => {
+                        setSelectedAccount(row);
+                        handleOpenModalDep();
+                      }}
+                    >
+                      Deposit
+                    </button>
                     <button type="button" className="btn btn-edit">
-                      Update
+                      Withdraw
                     </button>
                     <button
                       type="button"
@@ -53,6 +84,13 @@ function AccountsList({ accounts, handleDelete, handleSearch }) {
           </tbody>
         </table>
       </div>
+      {isOpenDep && selectedAccount && (
+        <DepositModal
+          isOpen={isOpenDep}
+          closeModal={handleCloseModalDep}
+          account={selectedAccount}
+        ></DepositModal>
+      )}
     </main>
   );
 }

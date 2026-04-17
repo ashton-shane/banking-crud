@@ -9,4 +9,6 @@ import lombok.Setter;
 @AllArgsConstructor
 public class AmountDTO {
     private double amount;
+    private Long accountId;
+    private String customerName;
 }

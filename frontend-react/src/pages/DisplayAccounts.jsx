@@ -16,9 +16,18 @@ const DisplayAccounts = () => {
     axios
       .delete(`/api/accounts/${id}`)
       .then(() => {
-        setAccounts(prev => prev.filter(acc => acc.id !== id));
+        setAccounts((prev) => prev.filter((acc) => acc.id !== id));
       })
       .catch((err) => console.error(err));
+  };
+
+  const fetchAccounts = () => {
+    axios
+      .get("/api/accounts")
+      .then((res) => {
+        setAccounts(res.data);
+      })
+      .catch((error) => console.error("Error:", error));
   };
 
   useEffect(() => {
@@ -30,11 +39,12 @@ const DisplayAccounts = () => {
 
   return (
     <div>
-      <AccountsList 
+      <AccountsList
         accounts={accounts}
         handleDelete={handleDelete}
         handleSearch={handleSearch}
-       />
+        fetchAccounts={fetchAccounts}
+      />
     </div>
   );
 };

@@ -1,9 +1,6 @@
 package com.fdm.SpringAssessment.service;
 
 import com.fdm.SpringAssessment.DTO.AccountDTO;
-import com.fdm.SpringAssessment.DTO.CustomerDTO;
-import com.fdm.SpringAssessment.controllers.CustomerController;
-import com.fdm.SpringAssessment.enums.AccountType;
 import com.fdm.SpringAssessment.enums.CustomerType;
 import com.fdm.SpringAssessment.models.Account;
 import com.fdm.SpringAssessment.models.CheckingAccount;
@@ -16,11 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-
-import static java.util.stream.Collectors.toList;
 
 @Service
 @RequiredArgsConstructor
