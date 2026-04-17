@@ -1,8 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import DepositModal from "../components/DepositModal";
 
-const FindAccount = () => {
+const FindAccount = ({fetchAccounts}) => {
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -15,6 +16,15 @@ const FindAccount = () => {
     },
   ]);
 
+  // === DEPOSIT MODAL STUFF ===
+  const [refresh, setRefresh] = useState(false);
+  const [isOpenDep, setIsOpenDep] = useState(false);
+  const handleOpenModalDep = () => setIsOpenDep(true);
+  const handleCloseModalDep = () => {
+    setIsOpenDep(false);
+    setRefresh((prev) => !prev);
+  };
+
   useEffect(() => {
     axios
       .get(`/api/accounts/${id}`)
@@ -22,7 +32,7 @@ const FindAccount = () => {
         setAccountRow(res.data);
       })
       .catch((error) => "Error: " + error);
-  }, []);
+  }, [refresh]);
 
   const handleDelete = (id) => {
     axios
@@ -59,9 +69,19 @@ const FindAccount = () => {
               <td className="mono">{accountRow.accountType}</td>
               <td className="col-actions">
                 <div className="actions-cell">
-                  <button type="button" className="btn btn-edit">
-                    Update
-                  </button>
+                    <button
+                      type="button"
+                      className="btn btn-primary"
+                      onClick={() => {
+                        setAccountRow(accountRow);
+                        handleOpenModalDep();
+                      }}
+                    >
+                      Deposit
+                    </button>
+                    <button type="button" className="btn btn-edit">
+                      Withdraw
+                    </button>
                   <button
                     type="button"
                     className="btn btn-danger"
@@ -75,6 +95,13 @@ const FindAccount = () => {
           </tbody>
         </table>
       </div>
+      {isOpenDep && accountRow && (
+        <DepositModal
+          isOpen={isOpenDep}
+          closeModal={handleCloseModalDep}
+          account={accountRow}
+        ></DepositModal>
+      )}
     </main>
   );
 };
