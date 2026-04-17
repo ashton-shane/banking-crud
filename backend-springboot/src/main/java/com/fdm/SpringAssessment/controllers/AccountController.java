@@ -37,4 +37,14 @@ public class AccountController {
         accountService.deleteById(accountId);
     }
 
+    @PutMapping("/deposit/{accountId}")
+    public void deposit(@PathVariable long accountId, @RequestParam double amount) {
+        accountService.deposit(accountId, amount);
+    }
+
+    @PutMapping("/withdraw/{accountId}")
+    public void withdraw(@PathVariable long accountId, @RequestParam double amount) {
+        accountService.withdraw(accountId, amount);
+    }
+
 }

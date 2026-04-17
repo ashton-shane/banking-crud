@@ -51,6 +51,23 @@ public class AccountService {
                 .toList();
     }
 
+    public void deposit(long accountId, double amount) {
+        Account account = accountRepository.findById(accountId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
+        account.setBalance(account.getBalance() + amount);
+        accountRepository.save(account);
+    }
+
+    public void withdraw(long accountId, double amount) {
+        Account account = accountRepository.findById(accountId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Account not found"));
+        if (account.getBalance() < amount) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Insufficient funds");
+        }
+        account.setBalance(account.getBalance() - amount);
+        accountRepository.save(account);
+    }
+
     public AccountDTO toDTO(Account account) {
         return AccountDTO.builder()
                 .id(account.getId())
