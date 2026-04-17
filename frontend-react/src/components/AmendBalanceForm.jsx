@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/Form.css";
 
-const DepositForm = ({ closeModal, account }) => {
+const AmendBalanceForm = ({ closeModal, account, action }) => {
   // flattened form state (no nested address)
   const [form, setForm] = useState({
     amount: 0,
@@ -29,14 +29,14 @@ const DepositForm = ({ closeModal, account }) => {
     console.log(form);
 
     axios
-      .put(`/api/accounts/deposit/${account.id}`, form)
+      .put(`/api/accounts/${action.toLowerCase()}/${account.id}`, form)
       .then((res) => {
-        console.log("Amount deposited successfully ");
+        console.log(`${action} successful`);
         closeModal();
       })
       .catch((err) => {
         console.error(
-          "Deposit failed: ",
+          `${action} failed`,
           err.response?.data ?? err.message,
         );
       });
@@ -46,20 +46,19 @@ const DepositForm = ({ closeModal, account }) => {
     <form onSubmit={handleSubmit}>
       <p>Customer Name: {account.customerName}</p>
       <p>Account Id: {account.id}</p>
-      <p>Amount to Deposit: </p>
+      <p>Amount to {action}: </p>
       <input
         type="number"
         name="amount"
-        placeholder="Amount to Deposit"
         value={form.amount}
         onChange={handleChange}
       />
 
       <button type="submit" className="btn btn-add">
-        Deposit Money
+        Amend Account Balance
       </button>
     </form>
   );
 };
 
-export default DepositForm;
+export default AmendBalanceForm;

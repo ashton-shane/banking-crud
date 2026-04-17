@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import DepositModal from "../components/DepositModal";
+import DepositModal from "../components/AmendBalanceModal";
 
-const FindAccount = ({fetchAccounts}) => {
+const FindAccount = ({ fetchAccounts }) => {
   const { id } = useParams();
   const navigate = useNavigate();
 
@@ -69,19 +69,19 @@ const FindAccount = ({fetchAccounts}) => {
               <td className="mono">{accountRow.accountType}</td>
               <td className="col-actions">
                 <div className="actions-cell">
-                    <button
-                      type="button"
-                      className="btn btn-primary"
-                      onClick={() => {
-                        setAccountRow(accountRow);
-                        handleOpenModalDep();
-                      }}
-                    >
-                      Deposit
-                    </button>
-                    <button type="button" className="btn btn-edit">
-                      Withdraw
-                    </button>
+                  <button
+                    type="button"
+                    className="btn btn-primary"
+                    onClick={() => {
+                      setAccountRow(accountRow);
+                      handleOpenModalDep();
+                    }}
+                  >
+                    Deposit
+                  </button>
+                  <button type="button" className="btn btn-edit">
+                    Withdraw
+                  </button>
                   <button
                     type="button"
                     className="btn btn-danger"
